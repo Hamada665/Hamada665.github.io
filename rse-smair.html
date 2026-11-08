@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feuille de route RSE · SMAIR · Ahmed Amine Boutkhil</title>
+  <meta name="description" content="Note de recommandation RSE et écoconception pour une PME industrielle (étude de cas, EIJV).">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Share preview (LinkedIn, WhatsApp, e-mail...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hamada665.github.io/rse-smair.html">
+  <meta property="og:title" content="Feuille de route RSE & écoconception · Ahmed Amine Boutkhil">
+  <meta property="og:description" content="Note de recommandation RSE et écoconception pour une PME industrielle.">
+  <meta property="og:image" content="https://hamada665.github.io/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================================
+       Design tokens: same palette as the portfolio + pillar colors
+       ===================================================================== */
+    :root {
+      --bg: #0A0A0B; --bg-2: #101012; --card: #141416; --card-2: #1A1A1D;
+      --wine: #7A1A1F; --wine-hover: #8E2228; --wine-text: #B2454B;
+      --text: #F2F2F2; --muted: #9A9A9E; --faint: #5E5E63; --line: #26262A;
+      --env: #5FA77A;      /* environmental pillar (leaf) */
+      --soc: #C9A24B;      /* social pillar */
+      --eco: #B2454B;      /* economic pillar */
+      --gov: #8E8EA0;      /* governance */
+      --pad-x: clamp(16px, 8vw, 128px);
+      --radius: 10px;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { font-family: "Montserrat", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    [hidden] { display: none !important; }
+    ::selection { background: var(--wine); color: #fff; }
+    .ic { width: 1em; height: 1em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.125em; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* Pillar tags */
+    .tag { display: inline-flex; align-items: center; gap: 6px; font-size: .7rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; }
+    .tag--env { color: var(--env); } .tag--soc { color: var(--soc); } .tag--eco { color: var(--eco); } .tag--gov { color: var(--gov); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+    /* ===== Navigation ===== */
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px var(--pad-x); background: rgba(10,10,11,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav__back { display: inline-flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--muted); transition: color .2s; }
+    .nav__back:hover { color: var(--text); }
+    .nav__logo { font-weight: 700; font-size: 1.3rem; letter-spacing: -1px; color: var(--text); }
+    .nav__logo span { color: var(--wine-text); }
+    .toc { display: flex; gap: 22px; font-size: .8rem; letter-spacing: 1px; }
+    .toc a { color: var(--muted); transition: color .2s; }
+    .toc a:hover, .toc a.active { color: var(--env); }
+    .progress { position: fixed; left: 0; top: 0; height: 2px; background: var(--env); z-index: 60; width: 0; }
+
+    /* ===== Hero ===== */
+    .hero { position: relative; overflow: hidden; padding: 150px var(--pad-x) 90px; }
+    .hero::before { content: ""; position: absolute; width: 60vw; height: 70vh; left: -20vw; top: 10vh; background: radial-gradient(closest-side, rgba(122,26,31,.40), transparent); filter: blur(40px); }
+    .hero::after { content: ""; position: absolute; width: 46vw; height: 46vw; right: -6vw; top: 0; background: radial-gradient(closest-side, rgba(95,167,122,.16), transparent); filter: blur(30px); }
+    .hero > * { position: relative; z-index: 1; }
+    .hero__leaf { position: absolute; right: var(--pad-x); top: 130px; width: min(320px, 34vw); color: rgba(95,167,122,.22); z-index: 0; }
+    .hero__leaf .ic { width: 100%; height: auto; stroke-width: .6; }
+    .eyebrow { color: var(--env); font-size: .78rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .hero__title { font-size: clamp(2.1rem, 4.6vw, 3.8rem); font-weight: 600; line-height: 1.12; letter-spacing: -1px; max-width: 900px; margin-bottom: 22px; }
+    .hero__title em { font-style: normal; color: var(--env); }
+    .hero__sub { color: var(--muted); max-width: 640px; font-size: 1.04rem; margin-bottom: 34px; }
+    .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 900px; }
+    .fact { background: rgba(20,20,22,.8); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+    .fact b { display: block; font-size: 1.4rem; }
+    .fact span { font-size: .78rem; color: var(--muted); }
+    .context { margin-top: 26px; max-width: 900px; font-size: .84rem; color: var(--faint); border-left: 2px solid var(--line); padding-left: 14px; }
+
+    /* ===== Sections ===== */
+    .section { padding: 100px var(--pad-x); }
+    .section--alt { background: var(--bg-2); }
+    .head { max-width: 720px; margin-bottom: 46px; }
+    .num { font-family: var(--mono); font-size: .82rem; color: var(--faint); margin-bottom: 8px; }
+    .title { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 600; line-height: 1.2; letter-spacing: -.5px; margin-bottom: 12px; }
+    .intro { color: var(--muted); }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .hint { font-size: .76rem; color: var(--faint); margin-top: 12px; display: flex; align-items: center; gap: 8px; }
+
+    /* Definition box */
+    .def { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; margin-bottom: 40px; }
+    .def__quote { font-size: 1.12rem; line-height: 1.6; border-left: 3px solid var(--env); padding-left: 20px; }
+    .def__quote small { display: block; margin-top: 10px; font-size: .78rem; color: var(--faint); }
+    .pillars { display: grid; gap: 10px; }
+    .pillar { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 8px; background: var(--card); border: 1px solid var(--line); }
+    .pillar .ic { font-size: 1.3rem; margin-top: 2px; }
+    .pillar b { display: block; font-size: .92rem; }
+    .pillar span { font-size: .84rem; color: var(--muted); }
+
+    /* Diagnostic */
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .filter { font-size: .8rem; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); display: inline-flex; align-items: center; gap: 8px; transition: all .2s; }
+    .filter.on { color: var(--text); border-color: var(--faint); background: var(--card-2); }
+    .diag { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .issue { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 18px 16px; transition: opacity .3s, transform .3s, border-color .3s; }
+    .issue.dim { opacity: .18; transform: scale(.98); }
+    .issue__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .issue__icon { width: 36px; height: 36px; border-radius: 8px; display: grid; place-items: center; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+    .issue h4 { font-size: .98rem; margin-bottom: 4px; }
+    .issue p { font-size: .86rem; color: var(--muted); }
+    .issue__tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+    /* Materiality matrix */
+    .mat { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; align-items: start; }
+    .mat__chart { position: relative; }
+    .mat #matrix { width: 100%; height: auto; display: block; overflow: visible; }
+    .mat__num { font-size: 9px; font-weight: 700; fill: #0A0A0B; pointer-events: none; }
+    .legend { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; margin-top: 14px; }
+    .legend button { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; font-size: .78rem; color: var(--muted); padding: 4px 6px; border-radius: 4px; }
+    .legend button:hover, .legend button.on { color: var(--text); background: var(--bg); }
+    .legend b { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: .62rem; color: #0A0A0B; flex-shrink: 0; }
+    .mat__pt { cursor: pointer; transition: r .2s; }
+    .mat__pt:hover, .mat__pt.on { stroke: #fff; stroke-width: 2; }
+    .mat__label { font-size: 10px; fill: var(--muted); pointer-events: none; }
+    .panel { position: sticky; top: 100px; }
+    .panel__kicker { font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); font-weight: 600; margin-bottom: 8px; }
+    .panel h4 { font-size: 1.15rem; margin-bottom: 8px; }
+    .panel p { color: var(--muted); font-size: .9rem; }
+    .scores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+    .score { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; }
+    .score b { font-size: 1.3rem; display: block; }
+    .score span { font-size: .72rem; color: var(--faint); }
+    .panel ul { list-style: none; display: grid; gap: 8px; margin-top: 12px; }
+    .panel li { font-size: .88rem; color: #D2D2D5; padding-left: 22px; position: relative; }
+    .panel li::before { content: ""; position: absolute; left: 4px; top: .6em; width: 7px; height: 7px; border-radius: 2px; background: var(--env); }
+
+    /* Stakeholders */
+    .sh { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; align-items: start; }
+    .orbit { position: relative; aspect-ratio: 1; width: 100%; max-width: 560px; margin: 0 auto; }
+    .orbit__ring { position: absolute; border-radius: 50%; border: 1px dashed #2E2E33; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .orbit__ring span { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); background: var(--bg-2); padding: 0 8px; font-size: .66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); white-space: nowrap; }
+    .orbit__core { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 22%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #2A1214, #160B0C); border: 1px solid var(--wine); display: grid; place-content: center; text-align: center; font-weight: 700; font-size: .95rem; }
+    .orbit__core small { display: block; font-weight: 400; font-size: .62rem; color: var(--muted); }
+    .actor { position: absolute; transform: translate(-50%, -50%); padding: 6px 11px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: .72rem; white-space: nowrap; transition: border-color .2s, background .2s, transform .2s; }
+    .actor:hover { transform: translate(-50%, -50%) scale(1.06); }
+    .actor.on { border-color: var(--env); background: #0F1A13; color: #fff; }
+    .actor i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+    .sh__legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 14px; font-size: .78rem; color: var(--muted); }
+    .sh__legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+    .infl { display: flex; align-items: center; gap: 10px; margin: 10px 0 4px; font-size: .78rem; color: var(--faint); }
+    .bar { flex: 1; height: 6px; border-radius: 3px; background: #222226; overflow: hidden; }
+    .bar i { display: block; height: 100%; background: var(--env); transition: width .6s ease; }
+
+    /* Roadmap */
+    .road { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; position: relative; }
+    .road::before { content: ""; position: absolute; left: 4%; right: 18%; top: 27px; height: 2px; background: linear-gradient(90deg, var(--wine), var(--env)); opacity: .6; }
+    .step { position: relative; text-align: left; padding-top: 0; }
+    .step__dot { width: 56px; height: 56px; border-radius: 50%; background: var(--bg); border: 2px solid var(--line); display: grid; place-items: center; font-weight: 700; margin-bottom: 14px; transition: border-color .3s, background .3s, color .3s; position: relative; z-index: 1; }
+    .step.on .step__dot { border-color: var(--env); background: #0F1A13; color: var(--env); }
+    .step__when { font-family: var(--mono); font-size: .74rem; color: var(--faint); }
+    .step__title { font-weight: 600; font-size: .95rem; line-height: 1.3; margin-top: 2px; }
+    .road__detail { margin-top: 26px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 22px; }
+    .road__detail ul { list-style: none; display: grid; gap: 10px; }
+    .road__detail li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: .92rem; color: #D2D2D5; }
+    .road__detail li .ic { color: var(--env); margin-top: 3px; }
+    .deliv { background: var(--bg); border: 1px dashed #34343A; border-radius: 8px; padding: 16px; }
+    .deliv b { display: block; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+    .deliv p { font-size: .9rem; }
+
+    /* ISO 26000 rosette */
+    .iso { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: center; }
+    .rose { position: relative; aspect-ratio: 1; width: 100%; max-width: 480px; margin: 0 auto; }
+    .petal { position: absolute; width: 30%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); display: grid; place-content: center; text-align: center; padding: 10px; font-size: .74rem; line-height: 1.25; font-weight: 500; background: var(--card); border: 1px solid var(--line); transition: background .3s, border-color .3s, transform .3s; }
+    .petal:hover { transform: translate(-50%, -50%) scale(1.05); }
+    .petal .ic { margin: 0 auto 6px; font-size: 1.2rem; color: var(--muted); }
+    .petal.on { background: #0F1A13; border-color: var(--env); }
+    .petal.on .ic { color: var(--env); }
+    .petal--core { width: 34%; background: #160B0C; border-color: var(--wine); }
+    .petal--core.on { background: #2A1214; border-color: var(--wine-text); }
+    .petal--core.on .ic { color: var(--wine-text); }
+
+    /* Integrated management system */
+    .smi { display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: center; }
+    .pdca { position: relative; aspect-ratio: 1; }
+    .pdca svg { width: 100%; height: 100%; }
+    .pdca text { font-family: Montserrat, sans-serif; }
+    .procs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+    .proc { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+    .proc b { display: flex; align-items: center; gap: 8px; font-size: .9rem; margin-bottom: 4px; }
+    .proc b .ic { color: var(--env); }
+    .proc p { font-size: .84rem; color: var(--muted); }
+
+    /* Value chain */
+    .chain { display: flex; gap: 0; overflow-x: auto; padding: 6px 2px 16px; scrollbar-width: thin; }
+    .link { flex: 1 0 104px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; position: relative; padding: 0 4px; }
+    .link::after { content: ""; position: absolute; top: 26px; left: calc(50% + 28px); right: calc(-50% + 28px); height: 2px; background: #2C2C31; }
+    .link:last-child::after { display: none; }
+    .link__node { width: 52px; height: 52px; border-radius: 14px; border: 1px solid var(--line); background: var(--card); display: grid; place-items: center; font-size: 1.25rem; color: var(--muted); transition: all .25s; }
+    .link.on .link__node { border-color: var(--env); color: var(--env); background: #0F1A13; box-shadow: 0 0 0 5px rgba(95,167,122,.12); }
+    .link__name { font-size: .74rem; line-height: 1.25; color: var(--muted); min-height: 2.5em; }
+    .link.on .link__name { color: var(--text); }
+    .link__impact { width: 46px; height: 4px; border-radius: 2px; background: #222226; overflow: hidden; }
+    .link__impact i { display: block; height: 100%; background: var(--env); }
+    .chain__detail { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .imp { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    .imp b { display: flex; align-items: center; gap: 8px; font-size: .74rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+    .imp p { font-size: .88rem; color: #D2D2D5; }
+    .chain__lever { margin-top: 12px; padding: 16px 18px; border-radius: 8px; background: #0F1A13; border: 1px solid rgba(95,167,122,.35); display: flex; gap: 12px; align-items: flex-start; font-size: .92rem; }
+    .chain__lever .ic { color: var(--env); font-size: 1.2rem; margin-top: 2px; }
+
+    /* Eco-design */
+    .eco-def { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-bottom: 30px; }
+    .lifecycle { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .lifecycle span { font-size: .74rem; padding: 4px 10px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+    .ideas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .idea { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; transition: opacity .3s, border-color .3s; }
+    .idea:hover { border-color: rgba(95,167,122,.5); }
+    .idea.dim { opacity: .18; }
+    .idea__icon { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: #0F1A13; color: var(--env); font-size: 1.15rem; margin-bottom: 12px; }
+    .idea h4 { font-size: .98rem; margin-bottom: 6px; }
+    .idea p { font-size: .86rem; color: var(--muted); }
+    .gains { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .gain { font-size: .68rem; padding: 3px 9px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+    .compare { margin-top: 30px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; min-width: 640px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: .72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+    td:first-child { font-weight: 600; white-space: nowrap; }
+    td.before { color: var(--muted); }
+    td.after { color: #CFE7D7; }
+
+    /* KPIs */
+    .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .tab { font-size: .82rem; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); display: inline-flex; align-items: center; gap: 8px; }
+    .tab.on { background: var(--card-2); color: var(--text); border-color: var(--faint); }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+    .kpi { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; animation: kpiIn .4s ease both; }
+    @keyframes kpiIn { from { opacity: 0; transform: translateY(8px); } }
+    .kpi h4 { font-size: .95rem; margin-bottom: 6px; }
+    .kpi p { font-size: .82rem; color: var(--muted); flex: 1; }
+    .kpi__target { margin-top: 14px; display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px dashed var(--line); }
+    .kpi__target b { font-size: 1.25rem; }
+    .kpi__target span { font-size: .72rem; color: var(--faint); text-align: right; }
+
+    /* Quick wins */
+    .wins { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .wins ul { list-style: none; display: grid; gap: 10px; margin-top: 12px; }
+    .wins li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; font-size: .9rem; color: #D2D2D5; }
+    .wins li .ic { color: var(--env); margin-top: 3px; }
+
+    /* Footer */
+    .note { padding: 70px var(--pad-x) 90px; }
+    .note__box { border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; display: grid; grid-template-columns: auto 1fr; gap: 18px; background: var(--card); }
+    .note__box .ic { font-size: 1.6rem; color: var(--env); }
+    .note__box p { color: var(--muted); font-size: .9rem; }
+    .note__box p + p { margin-top: 8px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 24px; border-radius: 4px; font-weight: 600; font-size: .9rem; background: var(--wine); color: #fff; margin-top: 26px; transition: background .2s; }
+    .btn:hover { background: var(--wine-hover); }
+    .footer { border-top: 1px solid var(--line); padding: 24px var(--pad-x); font-size: .8rem; color: var(--faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1000px) {
+      .toc { display: none; }
+      .mat, .sh, .iso, .def, .eco-def, .road__detail, .smi { grid-template-columns: 1fr; }
+      .panel { position: static; }
+      .smi .pdca { max-width: 300px; margin: 0 auto; }
+    }
+    @media (max-width: 760px) {
+      :root { --pad-x: 20px; }
+      .section { padding: 80px var(--pad-x); }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .hero__leaf { opacity: .5; top: 90px; }
+      .road { grid-template-columns: 1fr; gap: 6px; }
+      .road::before { left: 27px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; background: linear-gradient(var(--wine), var(--env)); }
+      .step { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; }
+      .step__dot { margin-bottom: 0; }
+      .chain__detail, .wins { grid-template-columns: 1fr; }
+      /* Phones: the orbit becomes a simple list of chips */
+      .orbit { aspect-ratio: auto; display: flex; flex-wrap: wrap; gap: 8px; max-width: none; margin-bottom: 16px; }
+      .orbit__ring, .orbit__core { display: none; }
+      .actor { position: static; transform: none; font-size: .76rem; }
+      .actor:hover { transform: none; }
+      .petal { font-size: .62rem; padding: 6px; }
+      .petal .ic { font-size: 1rem; margin-bottom: 3px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Icon set: line icons, inherit the current text color -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></symbol>
+    <symbol id="i-landmark" viewBox="0 0 24 24"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M12 10v4"/><path d="M12 2v3"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></symbol>
+    <symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"/><path d="m14.5 12.5 2-2"/><path d="m11.5 9.5 2-2"/><path d="m8.5 6.5 2-2"/><path d="m17.5 15.5 2-2"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-recycle" viewBox="0 0 24 24"><path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"/><path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"/><path d="m14 16-3 3 3 3"/><path d="M8.293 13.596 7.196 9.5 3.1 10.598"/><path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843"/><path d="m13.378 9.633 4.096 1.098 1.097-4.096"/></symbol>
+    <symbol id="i-fan" viewBox="0 0 24 24"><path d="M10.827 16.379a6.082 6.082 0 0 1-8.618-7.002l5.412 1.45a6.082 6.082 0 0 1 7.002-8.618l-1.45 5.412a6.082 6.082 0 0 1 8.618 7.002l-5.412-1.45a6.082 6.082 0 0 1-7.002 8.618l1.45-5.412Z"/><path d="M12 12v.01"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+    <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-user-check" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+    <symbol id="i-pointer" viewBox="0 0 24 24"><path d="M22 14a8 8 0 0 1-8 8"/><path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"/><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-bolt-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+  </defs></svg>
+
+  <div class="progress" id="progress"></div>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav">
+    <a class="nav__back" href="index.html#rse"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg>Portfolio</a>
+    <div class="toc" id="toc">
+      <a href="#diagnostic" data-spy="diagnostic">Diagnostic</a>
+      <a href="#enjeux" data-spy="enjeux">Enjeux</a>
+      <a href="#parties" data-spy="parties">Parties prenantes</a>
+      <a href="#demarche" data-spy="demarche">Démarche</a>
+      <a href="#chaine" data-spy="chaine">Chaîne de valeur</a>
+      <a href="#ecoconception" data-spy="ecoconception">Écoconception</a>
+      <a href="#indicateurs" data-spy="indicateurs">Indicateurs</a>
+    </div>
+    <a class="nav__logo" href="index.html">AB<span>.</span></a>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header class="hero">
+    <div class="hero__leaf" aria-hidden="true"><svg class="ic"><use href="#i-leaf"/></svg></div>
+    <p class="eyebrow"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg>Note de recommandation · RSE &amp; écoconception</p>
+    <h1 class="hero__title">Faire de la RSE un levier de performance pour une <em>PME industrielle</em>.</h1>
+    <p class="hero__sub">Une feuille de route sur 3 ans pour SMAIR, PME familiale qui importe, assemble et installe des systèmes de ventilation et de climatisation industrielle. Objectif : fiabiliser la chaîne d'approvisionnement, réduire les impacts et remobiliser les équipes, sans perdre en rentabilité.</p>
+    <div class="facts">
+      <div class="fact"><b>250</b><span>salariés, dont 100 techniciens</span></div>
+      <div class="fact"><b>Asie → Amiens</b><span>via le port d'Anvers</span></div>
+      <div class="fact"><b>300 km</b><span>rayon d'intervention</span></div>
+      <div class="fact"><b>3 ans</b><span>horizon de la feuille de route</span></div>
+    </div>
+    <p class="context">Cas d'une entreprise fictive, traité à l'examen du module RSE (cycle Ingénieur éco-responsable, EIJV). J'ai ensuite choisi de l'approfondir sous la forme de cette note, pour aller au-delà des réponses attendues.</p>
+  </header>
+
+  <!-- ===== 01. Diagnostic ===== -->
+  <section class="section" id="diagnostic">
+    <div class="head reveal">
+      <p class="num">01 — Diagnostic</p>
+      <h2 class="title">Une croissance qui fragilise toute la chaîne.</h2>
+      <p class="intro">Les difficultés de SMAIR ne sont pas isolées : chacune touche à la fois les coûts, l'environnement et les équipes. C'est exactement le terrain d'une démarche RSE.</p>
+    </div>
+    <div class="filters reveal" id="diagFilters"></div>
+    <div class="diag" id="diag"></div>
+  </section>
+
+  <!-- ===== 02. RSE definition + materiality ===== -->
+  <section class="section section--alt" id="enjeux">
+    <div class="head reveal">
+      <p class="num">02 — Enjeux prioritaires</p>
+      <h2 class="title">La RSE, expliquée au directeur général.</h2>
+    </div>
+    <div class="def reveal">
+      <div>
+        <p class="def__quote">La RSE, c'est la responsabilité de l'entreprise vis-à-vis des impacts de ses décisions et de ses activités sur la société et l'environnement. Elle se traduit par un comportement éthique et transparent, qui contribue au développement durable, prend en compte les attentes des parties prenantes et s'intègre dans toute l'organisation.<small>D'après la définition de la norme ISO 26000</small></p>
+        <p class="intro" style="margin-top:18px">Pour SMAIR, la RSE n'est pas une charge en plus : c'est une méthode pour décider mieux. Moins de reprises, moins de transports d'urgence, moins de stocks immobilisés et des équipes plus engagées, c'est aussi plus de marge.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><svg class="ic" style="color:var(--env)" aria-hidden="true"><use href="#i-leaf"/></svg><div><b>Environnemental</b><span>Énergie des équipements, transports, matières, emballages et déchets.</span></div></div>
+        <div class="pillar"><svg class="ic" style="color:var(--soc)" aria-hidden="true"><use href="#i-users"/></svg><div><b>Social</b><span>Conditions de travail, compétences, reconnaissance et égalité.</span></div></div>
+        <div class="pillar"><svg class="ic" style="color:var(--eco)" aria-hidden="true"><use href="#i-coins"/></svg><div><b>Économique</b><span>Coûts complets, fiabilité fournisseurs, qualité et compétitivité.</span></div></div>
+        <div class="pillar"><svg class="ic" style="color:var(--gov)" aria-hidden="true"><use href="#i-landmark"/></svg><div><b>Gouvernance</b><span>Vision partagée, décisions transverses et transparence.</span></div></div>
+      </div>
+    </div>
+
+    <div class="mat reveal">
+      <div class="card mat__chart">
+        <p class="panel__kicker">Matrice de matérialité</p>
+        <svg id="matrix" viewBox="0 0 520 440" role="img" aria-label="Matrice de matérialité des enjeux de SMAIR"></svg>
+        <ul class="legend" id="matLegend"></ul>
+        <p class="hint"><svg class="ic" aria-hidden="true"><use href="#i-pointer"/></svg>Cliquez sur un enjeu. Positions estimées à partir du cas, à valider avec les parties prenantes.</p>
+      </div>
+      <div class="card panel" id="matPanel"></div>
+    </div>
+  </section>
+
+  <!-- ===== 03. Stakeholders ===== -->
+  <section class="section" id="parties">
+    <div class="head reveal">
+      <p class="num">03 — Parties prenantes</p>
+      <h2 class="title">Qui attend quoi de SMAIR ?</h2>
+      <p class="intro">De la famille actionnaire aux fournisseurs asiatiques, chaque acteur a des attentes différentes. Les identifier permet de prioriser et d'embarquer.</p>
+    </div>
+    <div class="sh reveal">
+      <div class="orbit" id="orbit">
+        <div class="orbit__ring" style="width:48%;height:48%"></div>
+        <div class="orbit__ring" style="width:74%;height:74%"></div>
+        <div class="orbit__ring" style="width:98%;height:98%"></div>
+        <div class="orbit__core">SMAIR<small>Amiens</small></div>
+      </div>
+      <div>
+        <div class="card panel" id="shPanel"></div>
+        <div class="sh__legend"><span><i style="background:#C9A24B"></i>Internes</span><span><i style="background:#B2454B"></i>Chaîne de valeur</span><span><i style="background:#8E8EA0"></i>Société</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04. Roadmap + ISO 26000 + SMI ===== -->
+  <section class="section section--alt" id="demarche">
+    <div class="head reveal">
+      <p class="num">04 — Démarche</p>
+      <h2 class="title">Une feuille de route en 5 étapes, sur 3 ans.</h2>
+      <p class="intro">Démarrer petit avec un projet pilote, prouver les gains, puis déployer. Une démarche réaliste pour une PME de 250 salariés.</p>
+    </div>
+    <div class="road reveal" id="road"></div>
+    <div class="road__detail reveal" id="roadDetail"></div>
+
+    <div class="head reveal" style="margin-top:90px">
+      <h3 class="title" style="font-size:1.6rem">Les 7 questions centrales de l'ISO 26000, appliquées à SMAIR.</h3>
+      <p class="intro">La gouvernance est au centre : c'est elle qui permet d'agir sur les six autres domaines.</p>
+    </div>
+    <div class="iso reveal">
+      <div class="rose" id="rose"></div>
+      <div class="card panel" id="isoPanel"></div>
+    </div>
+
+    <div class="head reveal" style="margin-top:90px">
+      <h3 class="title" style="font-size:1.6rem">Intégrer la RSE dans les décisions : le système de management intégré.</h3>
+      <p class="intro">La RSE ne doit pas rester un service à part. Elle s'appuie sur les systèmes existants (qualité ISO 9001, environnement ISO 14001, santé-sécurité ISO 45001) et sur une boucle d'amélioration continue, avec un critère RSE dans chaque processus.</p>
+    </div>
+    <div class="smi reveal">
+      <div class="pdca">
+        <svg viewBox="0 0 300 300" aria-label="Roue de l'amélioration continue">
+          <g fill="none" stroke-width="34">
+            <path d="M150 33 A117 117 0 0 1 267 150" stroke="#7A1A1F"/>
+            <path d="M267 150 A117 117 0 0 1 150 267" stroke="#8E2228"/>
+            <path d="M150 267 A117 117 0 0 1 33 150" stroke="#3F6E52"/>
+            <path d="M33 150 A117 117 0 0 1 150 33" stroke="#5FA77A"/>
+          </g>
+          <g fill="#fff" font-size="13" font-weight="700" text-anchor="middle">
+            <text x="232" y="74">PLANIFIER</text><text x="236" y="236">FAIRE</text><text x="66" y="236">VÉRIFIER</text><text x="66" y="74">AGIR</text>
+          </g>
+          <text x="150" y="146" text-anchor="middle" fill="#F2F2F2" font-size="15" font-weight="700">Amélioration</text>
+          <text x="150" y="166" text-anchor="middle" fill="#F2F2F2" font-size="15" font-weight="700">continue</text>
+        </svg>
+      </div>
+      <div class="procs" id="procs"></div>
+    </div>
+  </section>
+
+  <!-- ===== 05. Value chain ===== -->
+  <section class="section" id="chaine">
+    <div class="head reveal">
+      <p class="num">05 — Chaîne de valeur</p>
+      <h2 class="title">De l'Asie à la fin de vie : où sont les impacts ?</h2>
+      <p class="intro">Parcourez les 10 étapes du cycle de vie d'un bloc de ventilation. La jauge sous chaque étape indique son poids environnemental estimé.</p>
+    </div>
+    <div class="reveal">
+      <div class="chain" id="chain"></div>
+      <p class="hint"><svg class="ic" aria-hidden="true"><use href="#i-pointer"/></svg>Ordres de grandeur indicatifs : pour un équipement qui consomme de l'énergie pendant 15 à 20 ans, la phase d'usage domine généralement. À confirmer par une analyse de cycle de vie.</p>
+      <div class="chain__detail" id="chainDetail"></div>
+      <div class="chain__lever" id="chainLever"></div>
+    </div>
+  </section>
+
+  <!-- ===== 06. Eco-design ===== -->
+  <section class="section section--alt" id="ecoconception">
+    <div class="head reveal">
+      <p class="num">06 — Écoconception</p>
+      <h2 class="title">Concevoir le bloc de ventilation autrement.</h2>
+    </div>
+    <div class="eco-def reveal">
+      <div class="card">
+        <p class="panel__kicker">Définition</p>
+        <p>L'écoconception consiste à intégrer l'environnement dès la conception d'un produit, en raisonnant sur <b>tout son cycle de vie</b> et sur <b>plusieurs critères</b> (énergie, matières, déchets, émissions), sans dégrader sa performance ni sa qualité. L'objectif est d'éviter les transferts de pollution : réduire un impact sans en créer un autre ailleurs.</p>
+        <div class="lifecycle"><span>Matières</span><span>Fabrication</span><span>Transport</span><span>Installation</span><span>Usage</span><span>Maintenance</span><span>Fin de vie</span></div>
+      </div>
+      <div class="card">
+        <p class="panel__kicker">Le point de départ chez SMAIR</p>
+        <p>Les techniciens ont déjà repéré les pistes : assemblages plus faciles à démonter, pièces standardisées, cadres mieux adaptés au transport et accès simplifié pour la maintenance. La clé est de les associer <b>dès le devis</b>, avec les achats et la logistique, au lieu de les consulter une fois le projet vendu.</p>
+      </div>
+    </div>
+    <div class="filters reveal" id="ideaFilters"></div>
+    <div class="ideas reveal" id="ideas"></div>
+
+    <div class="compare reveal">
+      <p class="panel__kicker" style="margin-bottom:6px">Le bloc VMC, avant et après</p>
+      <table>
+        <thead><tr><th>Critère</th><th>Aujourd'hui</th><th>Bloc écoconçu</th></tr></thead>
+        <tbody>
+          <tr><td>Conception</td><td class="before">Pilotée par le commercial, sur prix et délai</td><td class="after">Revue croisée commercial, méthodes, achats, logistique et maintenance avant le devis</td></tr>
+          <tr><td>Énergie d'usage</td><td class="before">Peu documentée</td><td class="after">Moteurs haut rendement, régulation à la demande, consommation annoncée au client</td></tr>
+          <tr><td>Pièces</td><td class="before">Spécifiques à chaque projet</td><td class="after">Gamme modulaire, composants standards, moins de références en stock</td></tr>
+          <tr><td>Transport</td><td class="before">Cadres hors gabarit, emballages perdus</td><td class="after">Cadres dimensionnés au camion et à la palette, emballages réutilisables</td></tr>
+          <tr><td>Maintenance</td><td class="before">Accès difficile, interventions longues</td><td class="after">Trappes d'accès, pièces d'usure accessibles, maintenance préventive planifiée</td></tr>
+          <tr><td>Fin de vie</td><td class="before">Non anticipée</td><td class="after">Assemblages démontables, matériaux identifiés, reprise et recyclage organisés</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== 07. KPIs ===== -->
+  <section class="section" id="indicateurs">
+    <div class="head reveal">
+      <p class="num">07 — Indicateurs</p>
+      <h2 class="title">Mesurer pour piloter.</h2>
+      <p class="intro">Une première série d'indicateurs simples, suivis en CODIR. Les cibles sont des hypothèses à ajuster après le diagnostic initial (année 0).</p>
+    </div>
+    <div class="tabs reveal" id="kpiTabs"></div>
+    <div class="kpis" id="kpis"></div>
+
+    <div class="wins reveal" style="margin-top:60px">
+      <div class="card">
+        <p class="panel__kicker">Gains rapides · moins de 6 mois</p>
+        <ul>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Présenter la feuille de route au CSE et instaurer un point d'avancement trimestriel.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Harmoniser le tri des déchets entre ateliers et contractualiser leur valorisation.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Créer une revue de faisabilité obligatoire avant chaque devis important.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Lancer un recueil des idées des techniciens, avec un retour systématique.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="panel__kicker">Chantiers de fond · années 2 et 3</p>
+        <ul>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Politique d'achats responsables : coût complet, délai, qualité et carbone.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Nouvelle gamme de blocs VMC modulaires et écoconçus.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Système de management intégré qualité, environnement et santé-sécurité.</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Évaluation RSE externe pour répondre aux appels d'offres exigeants.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Note ===== -->
+  <section class="note">
+    <div class="note__box reveal">
+      <svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg>
+      <div>
+        <p><b style="color:var(--text)">À propos de cette note.</b> SMAIR est une entreprise fictive, étudiée dans le module RSE du cycle Ingénieur éco-responsable (EIJV). J'ai traité ce cas individuellement à l'examen, puis je l'ai approfondi de ma propre initiative sous la forme de cette note de recommandation.</p>
+        <p>Les chiffres non issus du cas (positions de la matrice, poids des étapes, cibles des indicateurs) sont des hypothèses de travail, présentées comme telles.</p>
+      </div>
+    </div>
+    <a class="btn" href="index.html#rse"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg>Retour au portfolio</a>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 Ahmed Amine Boutkhil · Élève-ingénieur Logistique Innovante &amp; Supply Chain</span>
+    <a href="index.html#contact">Me contacter</a>
+  </footer>
+
+  <script>
+  /* =====================================================================
+     Content (French) — edit here
+     ===================================================================== */
+  const P = { env: 'Environnement', soc: 'Social', eco: 'Économique', gov: 'Gouvernance' };
+  const icon = (n, cls = 'ic') => `<svg class="${cls}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+  const tag = p => `<span class="tag tag--${p}">${P[p]}</span>`;
+
+  // 01. Diagnostic
+  const ISSUES = [
+    { i: 'ship', t: "Approvisionnements longs et variables", d: "Délais d'Asie imprévisibles, ruptures évitées par du surstock et des transports d'urgence.", p: ['eco', 'env'] },
+    { i: 'box', t: "Stocks immobilisés", d: "Composants importés stockés pendant des mois : surface occupée, capital bloqué, risque d'obsolescence.", p: ['eco'] },
+    { i: 'ruler', t: "Plans incomplets ou modifiés", d: "Les ateliers reçoivent des plans après le lancement : reprises, rebuts et matières gaspillées.", p: ['eco', 'env', 'soc'] },
+    { i: 'truck', t: "Erreurs de coordination", d: "Retards de chantier et transports supplémentaires dans l'urgence, plus coûteux et plus émetteurs.", p: ['eco', 'env'] },
+    { i: 'users', t: "Techniciens saturés et démotivés", d: "Pics de charge, déplacements nombreux, suggestions ignorées et politique RH jugée inefficace.", p: ['soc'] },
+    { i: 'cart', t: "Achats centrés sur le prix", d: "Qualité et délais sous-évalués, relations fournisseurs peu formalisées et peu auditées.", p: ['eco', 'gov'] },
+    { i: 'recycle', t: "Emballages et déchets non valorisés", d: "Carton, bois, plastique et métal triés différemment d'un atelier à l'autre, sans valorisation ni réemploi.", p: ['env'] },
+    { i: 'zap', t: "Énergie d'usage non documentée", d: "La consommation des blocs chez le client, pourtant de plus en plus demandée, n'est ni mesurée ni affichée.", p: ['env', 'eco'] },
+    { i: 'landmark', t: "Aucune politique RSE", d: "Initiatives dispersées et non mesurées ; chaque direction suit ses propres priorités.", p: ['gov'] },
+  ];
+
+  // 02. Materiality: x = importance for SMAIR's performance, y = stakeholder expectations (0-10, hypotheses)
+  const STAKES = [
+    { id: 'appro', t: "Fiabilité des approvisionnements", x: 9.2, y: 7.6, p: 'eco', d: "Sécuriser les délais d'Asie conditionne tout le reste : stocks, planning des ateliers et respect des chantiers.", a: ["Diversifier avec des fournisseurs européens pour les composants critiques", "Contrats avec engagements de délai et de qualité", "Prévisions partagées avec les fournisseurs clés"] },
+    { id: 'energie', t: "Énergie d'usage des équipements", x: 8.4, y: 9.2, p: 'env', d: "Probablement le premier impact environnemental du produit, et une demande explicite des clients.", a: ["Moteurs haut rendement et régulation à la demande", "Fiche de consommation remise à chaque client", "Offre de suivi des performances en maintenance"] },
+    { id: 'travail', t: "Conditions de travail des techniciens", x: 8.6, y: 8.5, p: 'soc', d: "100 techniciens saturés et démotivés : un risque direct sur la qualité, les accidents et la fidélisation.", a: ["Planification des interventions par zone géographique", "Plans de formation et parcours de compétences", "Prise en compte et reconnaissance des suggestions"] },
+    { id: 'conception', t: "Conception collaborative", x: 8.9, y: 6.2, p: 'eco', d: "La cause racine des reprises : les métiers concernés ne sont pas consultés au moment du devis.", a: ["Revue de faisabilité croisée avant chaque devis", "Checklist conception : fabrication, transport, maintenance", "Retour d'expérience après chaque chantier"] },
+    { id: 'transport', t: "Transports et déplacements", x: 7.2, y: 7.3, p: 'env', d: "Transport maritime, routier, livraisons d'urgence et trajets des techniciens : un poste de coûts et d'émissions.", a: ["Mutualiser les livraisons chantier", "Optimiser les tournées des techniciens", "Mesurer les émissions par bloc livré"] },
+    { id: 'emballages', t: "Emballages et déchets", x: 5.8, y: 7.6, p: 'env', d: "Des volumes importants, aujourd'hui triés sans valorisation : un gisement d'économies visible et rapide.", a: ["Emballages réutilisables avec les fournisseurs clés", "Tri harmonisé et filière de valorisation", "Réemploi des palettes et caisses bois"] },
+    { id: 'achats', t: "Achats responsables", x: 7.6, y: 6.8, p: 'gov', d: "Passer du meilleur prix au meilleur coût complet, en intégrant délais, qualité et impacts.", a: ["Grille de sélection pondérée (coût complet, délai, qualité, RSE)", "Charte fournisseurs et audits des fournisseurs clés", "Relations formalisées et suivies"] },
+    { id: 'stocks', t: "Stocks immobilisés", x: 7.0, y: 4.2, p: 'eco', d: "Un enjeu surtout interne, mais qui libère de la trésorerie et de la surface.", a: ["Classement ABC des composants", "Réduction des références grâce à la standardisation", "Stocks de sécurité recalculés sur les délais réels"] },
+    { id: 'gouv', t: "Gouvernance et dialogue social", x: 6.6, y: 8.0, p: 'gov', d: "Le CSE demande la stratégie du DG : la transparence est la condition de l'adhésion.", a: ["Feuille de route présentée au CSE", "Comité RSE transverse au CODIR", "Communication régulière aux équipes"] },
+    { id: 'egalite', t: "Égalité et inclusion", x: 4.8, y: 6.4, p: 'soc', d: "Un objectif déjà cité par une direction, à structurer dans des métiers techniques peu féminisés.", a: ["Suivi de l'index égalité professionnelle", "Recrutement et alternance plus inclusifs"] },
+    { id: 'fin', t: "Fin de vie des équipements", x: 4.6, y: 5.6, p: 'env', d: "Encore peu abordée, mais attendue dans les appels d'offres exigeants.", a: ["Assemblages démontables", "Reprise des équipements remplacés", "Partenariat avec une filière de recyclage"] },
+  ];
+  const PCOL = { env: '#5FA77A', soc: '#C9A24B', eco: '#B2454B', gov: '#8E8EA0' };
+
+  // 03. Stakeholders: ring 1 internal, 2 value chain, 3 society; angle in degrees
+  const ACTORS = [
+    { t: "Direction & CODIR", r: 1, a: -90, inf: 10, att: "Une stratégie claire, rentable et défendable devant les actionnaires et les salariés.", rep: "Feuille de route sur 3 ans, avec des indicateurs suivis en CODIR." },
+    { t: "Famille Morel", r: 1, a: 0, inf: 9, att: "Pérennité de l'entreprise familiale, réputation et rentabilité à long terme.", rep: "Montrer que la RSE réduit les coûts cachés et protège la valeur de l'entreprise." },
+    { t: "Techniciens", r: 1, a: 90, inf: 7, att: "Moins de saturation, des chantiers mieux préparés, être écoutés et reconnus.", rep: "Revue de conception en amont, planification par zone, suggestions prises en compte." },
+    { t: "CSE", r: 1, a: 180, inf: 7, att: "Connaître la stratégie, une politique RH adaptée et de meilleures conditions de travail.", rep: "Présentation de la feuille de route et point d'avancement trimestriel." },
+    { t: "Fournisseurs Asie", r: 2, a: -135, inf: 7, att: "Volumes réguliers, prévisions fiables et relation durable.", rep: "Contrats formalisés, prévisions partagées, charte et audits." },
+    { t: "Transitaires & maritime", r: 2, a: -80, inf: 5, att: "Flux planifiés et documents fiables.", rep: "Consolidation des envois et données carbone par trajet." },
+    { t: "Transporteurs", r: 2, a: -20, inf: 5, att: "Moins de demandes en urgence et des chargements optimisés.", rep: "Livraisons planifiées et cadres dimensionnés pour le camion." },
+    { t: "Clients industriels", r: 2, a: 30, inf: 9, att: "Fiabilité, délais tenus, consommation énergétique, réparabilité et durée de vie.", rep: "Fiche produit avec consommation et réparabilité, offre de maintenance." },
+    { t: "Plateformes logistiques", r: 2, a: 150, inf: 7, att: "Installations performantes sans interrompre leur activité.", rep: "Interventions planifiées et maintenance préventive." },
+    { t: "Fournisseurs locaux", r: 2, a: 195, inf: 4, att: "Des partenariats stables pour les tuyauteries et supports.", rep: "Relocaliser une partie des achats et réduire les distances." },
+    { t: "État & régulateurs", r: 3, a: -125, inf: 8, att: "Conformité : environnement, fluides frigorigènes, sécurité et droit du travail.", rep: "Veille réglementaire intégrée au système de management." },
+    { t: "Collectivités", r: 3, a: -50, inf: 4, att: "Emploi local, apprentissage et maîtrise des nuisances.", rep: "Alternance, achats locaux et partenariats avec les écoles." },
+    { t: "Donneurs d'ordre", r: 3, a: 52, inf: 8, att: "Des preuves d'engagement environnemental et sociétal.", rep: "Évaluation RSE externe et indicateurs publiés." },
+    { t: "Banques & assureurs", r: 3, a: 128, inf: 6, att: "Risques maîtrisés et trajectoire durable.", rep: "Reporting RSE simple et transparent." },
+    { t: "Écoles & candidats", r: 3, a: 90, inf: 5, att: "Une entreprise attractive, qui forme et qui a du sens.", rep: "Marque employeur appuyée sur la démarche RSE." },
+  ];
+  const RING = { 1: 24, 2: 37, 3: 49 };   // radius in % of the orbit
+
+  // 04. Roadmap
+  const STEPS = [
+    { when: "Mois 0 à 3", t: "S'engager et organiser", items: ["Le DG formalise l'engagement et l'objectif « la performance n'est pas que financière »", "Création d'un comité RSE transverse et nomination d'un référent RSE", "Présentation de la démarche au CSE et aux équipes"], out: "Lettre d'engagement de la direction et comité RSE en place." },
+    { when: "Mois 3 à 6", t: "Diagnostiquer et écouter", items: ["Autodiagnostic sur les 7 questions centrales de l'ISO 26000", "Bilan carbone simplifié : énergie des sites, transports amont et aval, déplacements", "Entretiens avec les parties prenantes et matrice de matérialité validée"], out: "État des lieux chiffré (année 0) et enjeux prioritaires validés." },
+    { when: "Mois 6 à 12", t: "Projet pilote", items: ["Une gamme de bloc VMC repensée en conception collaborative", "Emballages réutilisables testés avec deux fournisseurs clés", "Tri des déchets harmonisé entre les ateliers", "Planification des interventions par zone sur une équipe test"], out: "Résultats du pilote : coûts, délais, déchets, satisfaction des équipes." },
+    { when: "Année 2", t: "Déployer et intégrer", items: ["Généralisation des pratiques validées par le pilote", "Politique d'achats responsables et charte fournisseurs", "Intégration dans le système de management (qualité, environnement, santé-sécurité)", "Plan de formation lié aux nouvelles pratiques"], out: "Processus mis à jour et critères RSE dans les décisions." },
+    { when: "Année 3", t: "Mesurer et valoriser", items: ["Tableau de bord RSE suivi en CODIR et revue annuelle", "Rapport RSE et informations produit partagés avec les clients", "Évaluation RSE externe pour répondre aux appels d'offres", "Nouvelle boucle d'amélioration continue"], out: "Démarche reconnue, mesurée et intégrée à la stratégie." },
+  ];
+
+  // ISO 26000 core subjects (index 0 = governance, at the center)
+  const ISO = [
+    { t: "Gouvernance de l'organisation", i: 'landmark', a: ["Comité RSE transverse et référent RSE", "Objectifs RSE intégrés aux objectifs du CODIR", "Feuille de route partagée avec le CSE"] },
+    { t: "Droits de l'Homme", i: 'shield', a: ["Charte fournisseurs incluant les droits fondamentaux", "Évaluation des fournisseurs asiatiques à risque"] },
+    { t: "Relations et conditions de travail", i: 'users', a: ["Planification des charges et des déplacements", "Plans de formation et reconnaissance des compétences", "Prévention des risques liés aux chantiers et à la route"] },
+    { t: "Environnement", i: 'leaf', a: ["Réduction de l'énergie d'usage des blocs", "Emballages réutilisables et valorisation des déchets", "Optimisation des transports"] },
+    { t: "Loyauté des pratiques", i: 'handshake', a: ["Achats au coût complet et non au seul prix", "Relations fournisseurs formalisées, délais de paiement respectés", "Audits des fournisseurs clés"] },
+    { t: "Questions relatives aux consommateurs", i: 'user-check', a: ["Information transparente : consommation, durée de vie, réparabilité", "Service de maintenance et de suivi des performances"] },
+    { t: "Communautés et développement local", i: 'home', a: ["Fournisseurs locaux pour les tuyauteries et supports", "Apprentissage, alternance et partenariats avec les écoles d'Amiens"] },
+  ];
+
+  // Integrated management: one RSE criterion per process
+  const PROCS = [
+    { i: 'message', t: "Devis & conception", d: "Revue de faisabilité croisée et critères énergie, réparabilité et transport dans chaque offre." },
+    { i: 'cart', t: "Achats", d: "Sélection au coût complet : prix, délai, qualité et impact." },
+    { i: 'factory', t: "Fabrication", d: "Plans figés avant lancement, réduction des rebuts et des consommations." },
+    { i: 'box', t: "Logistique & stocks", d: "Stocks calculés sur les délais réels, emballages réutilisables." },
+    { i: 'truck', t: "Installation", d: "Livraisons mutualisées et chantiers préparés avec le terrain." },
+    { i: 'wrench', t: "Maintenance & SAV", d: "Maintenance préventive, suivi des performances, retour d'expérience vers la conception." },
+  ];
+
+  // 05. Value chain (w = estimated environmental weight 0-100, hypothesis)
+  const CHAIN = [
+    { i: 'cart', t: "Approvisionnement en Asie", w: 30, env: "Matières premières et fabrication des composants, peu tracées.", soc: "Conditions de travail chez les fournisseurs mal connues.", eco: "Délais longs et variables, dépendance au prix.", lever: "Charte fournisseurs, audits et diversification européenne pour les composants critiques." },
+    { i: 'ship', t: "Transport maritime", w: 15, env: "Émissions du fret sur de longues distances et emballages volumineux.", soc: "Peu d'enjeux directs pour SMAIR.", eco: "Aléas de délai et coûts de fret fluctuants.", lever: "Consolider les envois et remplir les conteneurs grâce à des cadres standardisés." },
+    { i: 'truck', t: "Transport routier Anvers → Amiens", w: 8, env: "Émissions des camions, aggravées par les livraisons partielles.", soc: "Sécurité routière des prestataires.", eco: "Coût par mètre cube transporté.", lever: "Planifier les arrivages et optimiser le taux de remplissage." },
+    { i: 'factory', t: "Fabrication & assemblage", w: 12, env: "Consommation énergétique des ateliers, chutes et rebuts liés aux reprises.", soc: "Charge et conditions de travail dans les ateliers.", eco: "Reprises causées par les plans incomplets.", lever: "Plans figés et revue de faisabilité avant lancement." },
+    { i: 'box', t: "Stockage & préparation", w: 5, env: "Surfaces chauffées, emballages et déchets.", soc: "Manutention de pièces volumineuses.", eco: "Capital immobilisé pendant des mois.", lever: "Classement ABC, moins de références, emballages réutilisables." },
+    { i: 'truck', t: "Livraison sur chantier", w: 7, env: "Transports supplémentaires dans l'urgence.", soc: "Pression sur les équipes en cas de retard.", eco: "Coûts des livraisons urgentes et des retards.", lever: "Livraisons mutualisées et planifiées avec les chantiers." },
+    { i: 'wrench', t: "Installation & mise en service", w: 6, env: "Déplacements des techniciens dans un rayon de 300 km.", soc: "Saturation et pics de charge.", eco: "Qualité des réglages, clé de la performance future.", lever: "Planification par zone et checklist de mise en service." },
+    { i: 'fan', t: "Usage chez le client", w: 100, env: "Consommation d'électricité pendant toute la durée de vie : l'impact majeur.", soc: "Qualité de l'air et confort des salariés du client.", eco: "Facture énergétique du client, argument commercial.", lever: "Moteurs haut rendement, régulation à la demande et consommation affichée." },
+    { i: 'wrench', t: "Maintenance", w: 10, env: "Déplacements, pièces de rechange et réglages qui maintiennent la performance.", soc: "Interventions longues si l'accès est difficile.", eco: "Revenus récurrents et fidélisation.", lever: "Accès simplifié, maintenance préventive et contrats de performance." },
+    { i: 'recycle', t: "Fin de vie", w: 12, env: "Métaux, plastiques et fluides à récupérer.", soc: "Sécurité du démontage.", eco: "Valeur des matières récupérées.", lever: "Assemblages démontables, reprise et filière de recyclage." },
+  ];
+
+  // 06. Eco-design ideas (g = gains)
+  const GAINS = { energie: "Énergie", matiere: "Matières", transport: "Transport", repar: "Réparabilité", stock: "Stocks" };
+  const IDEAS = [
+    { i: 'zap', t: "Moteurs haut rendement et régulation", d: "Moteurs à commutation électronique et ventilation à la demande, selon l'occupation et la qualité de l'air.", g: ['energie'] },
+    { i: 'layers', t: "Gamme modulaire", d: "Des modules standards combinés selon le besoin, plutôt qu'un bloc spécifique à chaque projet.", g: ['stock', 'matiere', 'repar'] },
+    { i: 'wrench', t: "Assemblages démontables", d: "Vis et clips plutôt que soudures et colles : réparation plus simple et tri en fin de vie.", g: ['repar', 'matiere'] },
+    { i: 'truck', t: "Cadres dimensionnés pour le transport", d: "Dimensions calées sur la palette et le camion : moins de vide transporté et moins d'emballage.", g: ['transport', 'matiere'] },
+    { i: 'clipboard', t: "Accès maintenance facilité", d: "Trappes et pièces d'usure accessibles : interventions plus rapides et performance maintenue.", g: ['repar', 'energie'] },
+    { i: 'box', t: "Emballages réutilisables", d: "Caisses et protections consignées avec les fournisseurs clés, réemploi des palettes.", g: ['matiere', 'transport'] },
+    { i: 'recycle', t: "Matériaux recyclés et identifiés", d: "Acier et aluminium recyclés, matériaux marqués pour faciliter le recyclage.", g: ['matiere'] },
+    { i: 'leaf', t: "Fluides frigorigènes à faible impact", d: "Pour les blocs de climatisation, privilégier des fluides à faible potentiel de réchauffement.", g: ['energie'] },
+    { i: 'bolt-flag', t: "Information au client", d: "Fiche produit : consommation, durée de vie, réparabilité et consignes d'entretien.", g: ['energie', 'repar'] },
+  ];
+
+  // 07. KPIs by pillar
+  const KPIS = {
+    env: [
+      { t: "Émissions transport par bloc livré", d: "kg CO₂e du fret amont et des livraisons, rapportés au nombre de blocs.", v: "−20 %", f: "Trimestriel" },
+      { t: "Emballages réutilisés", d: "Part des emballages fournisseurs réutilisés ou consignés.", v: "≥ 50 %", f: "Trimestriel" },
+      { t: "Déchets valorisés", d: "Part des déchets d'atelier recyclés ou valorisés.", v: "≥ 80 %", f: "Mensuel" },
+      { t: "Consommation d'un bloc type", d: "kWh par an d'un bloc de référence, nouvelle gamme vs actuelle.", v: "−15 %", f: "Par gamme" },
+    ],
+    soc: [
+      { t: "Heures de formation", d: "Heures de formation par salarié et par an.", v: "+50 %", f: "Annuel" },
+      { t: "Suggestions mises en œuvre", d: "Part des idées des techniciens étudiées et appliquées.", v: "≥ 30 %", f: "Trimestriel" },
+      { t: "Heures supplémentaires techniciens", d: "Indicateur de saturation et de pics de charge.", v: "−25 %", f: "Mensuel" },
+      { t: "Index égalité professionnelle", d: "Score officiel sur 100.", v: "≥ 85", f: "Annuel" },
+    ],
+    eco: [
+      { t: "Taux de reprises", d: "Part des chantiers nécessitant une reprise ou un transport d'urgence.", v: "−50 %", f: "Mensuel" },
+      { t: "Livraisons fournisseurs à l'heure et complètes", d: "Taux de service des fournisseurs (OTIF).", v: "≥ 90 %", f: "Mensuel" },
+      { t: "Stock immobilisé de plus de 90 jours", d: "Valeur des composants stockés depuis plus de 3 mois.", v: "−30 %", f: "Mensuel" },
+      { t: "Kilomètres par intervention", d: "Distance moyenne parcourue par intervention de technicien.", v: "−15 %", f: "Mensuel" },
+    ],
+    gov: [
+      { t: "Fournisseurs clés évalués", d: "Part des fournisseurs stratégiques ayant signé la charte et été audités.", v: "100 %", f: "Annuel" },
+      { t: "Achats avec critères RSE", d: "Part des achats sélectionnés avec une grille incluant la RSE.", v: "≥ 70 %", f: "Annuel" },
+      { t: "Revues RSE en CODIR", d: "Points d'avancement réalisés vs prévus.", v: "4 / an", f: "Trimestriel" },
+      { t: "Devis avec revue de faisabilité", d: "Part des devis importants revus par les métiers concernés.", v: "100 %", f: "Mensuel" },
+    ],
+  };
+
+  /* =====================================================================
+     Rendering & interactions
+     ===================================================================== */
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  // Reveal on scroll, reading progress, active section
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } }), { threshold: .1 });
+  $$('.reveal').forEach(el => obs.observe(el));
+  addEventListener('scroll', () => {
+    const h = document.documentElement; $('#progress').style.width = (h.scrollTop / (h.scrollHeight - innerHeight) * 100) + '%';
+  }, { passive: true });
+  const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('[data-spy]').forEach(a => a.classList.toggle('active', a.dataset.spy === e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  $$('section[id]').forEach(s => spy.observe(s));
+
+  // Generic pill filter
+  function filters(box, items, onPick) {
+    box.innerHTML = items.map((it, k) => `<button class="filter${k ? '' : ' on'}" data-k="${it.k}">${it.dot ? `<span class="dot" style="background:${it.dot}"></span>` : ''}${it.label}</button>`).join('');
+    $$('.filter', box).forEach(b => b.addEventListener('click', () => { $$('.filter', box).forEach(x => x.classList.toggle('on', x === b)); onPick(b.dataset.k); }));
+  }
+
+  // 01. Diagnostic
+  $('#diag').innerHTML = ISSUES.map(x => `<article class="issue" data-p="${x.p.join(' ')}">
+    <div class="issue__top"><span class="issue__icon">${icon(x.i)}</span></div>
+    <h4>${x.t}</h4><p>${x.d}</p><div class="issue__tags">${x.p.map(tag).join('')}</div></article>`).join('');
+  filters($('#diagFilters'), [{ k: 'all', label: 'Toutes les difficultés' }, ...Object.keys(P).map(k => ({ k, label: P[k], dot: PCOL[k] }))],
+    k => $$('.issue').forEach(el => el.classList.toggle('dim', k !== 'all' && !el.dataset.p.split(' ').includes(k))));
+
+  // 02. Materiality matrix (SVG)
+  (function matrix() {
+    const W = 520, H = 440, L = 46, B = 46, T = 14, R = 14;
+    const sx = v => L + v / 10 * (W - L - R), sy = v => H - B - v / 10 * (H - B - T);
+    let g = `<rect x="${sx(6.5)}" y="${sy(10)}" width="${sx(10) - sx(6.5)}" height="${sy(6.5) - sy(10)}" fill="rgba(95,167,122,.08)" stroke="rgba(95,167,122,.35)" stroke-dasharray="4 4" rx="6"/>
+      <text x="${sx(9.9)}" y="${sy(9.9) + 14}" text-anchor="end" fill="#5FA77A" font-size="11" font-weight="600">ENJEUX PRIORITAIRES</text>`;
+    for (let v = 0; v <= 10; v += 2.5) {
+      g += `<line x1="${sx(v)}" y1="${sy(0)}" x2="${sx(v)}" y2="${sy(10)}" stroke="#1E1E22"/><line x1="${sx(0)}" y1="${sy(v)}" x2="${sx(10)}" y2="${sy(v)}" stroke="#1E1E22"/>`;
+    }
+    g += `<line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(10)}" y2="${sy(0)}" stroke="#3A3A40"/><line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(0)}" y2="${sy(10)}" stroke="#3A3A40"/>
+      <text x="${(sx(0) + sx(10)) / 2}" y="${H - 12}" text-anchor="middle" fill="#9A9A9E" font-size="12">Importance pour la performance de SMAIR →</text>
+      <text transform="translate(16 ${(sy(0) + sy(10)) / 2}) rotate(-90)" text-anchor="middle" fill="#9A9A9E" font-size="12">Attentes des parties prenantes →</text>`;
+    STAKES.forEach((s, k) => {
+      g += `<circle class="mat__pt" data-k="${k}" cx="${sx(s.x)}" cy="${sy(s.y)}" r="10" fill="${PCOL[s.p]}"/>
+        <text class="mat__num" x="${sx(s.x)}" y="${sy(s.y) + 3}" text-anchor="middle">${k + 1}</text>`;
+    });
+    $('#matrix').innerHTML = g;
+    $('#matLegend').innerHTML = STAKES.map((s, k) => `<li><button data-k="${k}"><b style="background:${PCOL[s.p]}">${k + 1}</b>${s.t}</button></li>`).join('');
+    $$('#matLegend button').forEach(b => b.addEventListener('click', () => pick(+b.dataset.k)));
+    function pick(k) {
+      const s = STAKES[k];
+      $$('.mat__pt').forEach(c => c.classList.toggle('on', +c.dataset.k === k));
+      $$('#matLegend button').forEach(c => c.classList.toggle('on', +c.dataset.k === k));
+      $('#matPanel').innerHTML = `<p class="panel__kicker">Enjeu</p><h4>${s.t}</h4>${tag(s.p)}
+        <div class="scores"><div class="score"><b>${s.x.toFixed(1)}</b><span>Importance pour SMAIR /10</span></div><div class="score"><b>${s.y.toFixed(1)}</b><span>Attentes des parties prenantes /10</span></div></div>
+        <p>${s.d}</p><ul>${s.a.map(x => `<li>${x}</li>`).join('')}</ul>`;
+    }
+    $$('.mat__pt').forEach(c => c.addEventListener('click', () => pick(+c.dataset.k)));
+    pick(0);
+  })();
+
+  // 03. Stakeholder orbit
+  (function orbit() {
+    const box = $('#orbit');
+    const col = { 1: '#C9A24B', 2: '#B2454B', 3: '#8E8EA0' };
+    ACTORS.forEach((a, k) => {
+      const rad = a.a * Math.PI / 180, r = RING[a.r];
+      const b = document.createElement('button');
+      b.className = 'actor'; b.dataset.k = k;
+      b.style.left = (50 + r * Math.cos(rad)) + '%'; b.style.top = (50 + r * Math.sin(rad)) + '%';
+      b.innerHTML = `<i style="background:${col[a.r]}"></i>${a.t}`;
+      b.addEventListener('click', () => pick(k));
+      box.appendChild(b);
+    });
+    const ring = { 1: 'Partie prenante interne', 2: 'Chaîne de valeur', 3: 'Société' };
+    function pick(k) {
+      const a = ACTORS[k];
+      $$('.actor').forEach(x => x.classList.toggle('on', +x.dataset.k === k));
+      $('#shPanel').innerHTML = `<p class="panel__kicker">${ring[a.r]}</p><h4>${a.t}</h4>
+        <div class="infl">Influence sur SMAIR<span class="bar"><i style="width:${a.inf * 10}%"></i></span>${a.inf}/10</div>
+        <p style="margin-top:12px"><b style="color:var(--text)">Attentes.</b> ${a.att}</p>
+        <ul><li>${a.rep}</li></ul>`;
+    }
+    pick(7);
+  })();
+
+  // 04. Roadmap
+  $('#road').innerHTML = STEPS.map((s, k) => `<button class="step${k ? '' : ' on'}" data-k="${k}"><span class="step__dot">${k + 1}</span><span><span class="step__when">${s.when}</span><span class="step__title" style="display:block">${s.t}</span></span></button>`).join('');
+  function road(k) {
+    const s = STEPS[k];
+    $$('.step').forEach(x => x.classList.toggle('on', +x.dataset.k === k));
+    $('#roadDetail').innerHTML = `<div class="card"><p class="panel__kicker">Étape ${k + 1} · ${s.when}</p><h4 style="font-size:1.15rem;margin-bottom:14px">${s.t}</h4>
+      <ul>${s.items.map(x => `<li>${icon('check')}<span>${x}</span></li>`).join('')}</ul></div>
+      <div class="deliv"><b>Livrable de l'étape</b><p>${s.out}</p></div>`;
+  }
+  $$('.step').forEach(b => b.addEventListener('click', () => road(+b.dataset.k)));
+  road(0);
+
+  // ISO 26000 rosette: governance at the center, 6 subjects around
+  (function rose() {
+    const box = $('#rose');
+    ISO.forEach((s, k) => {
+      const b = document.createElement('button');
+      b.className = 'petal' + (k ? '' : ' petal--core'); b.dataset.k = k;
+      if (k) { const ang = (-90 + (k - 1) * 60) * Math.PI / 180; b.style.left = (50 + 34 * Math.cos(ang)) + '%'; b.style.top = (50 + 34 * Math.sin(ang)) + '%'; }
+      else { b.style.left = '50%'; b.style.top = '50%'; }
+      b.innerHTML = `${icon(s.i)}<span>${s.t}</span>`;
+      b.addEventListener('click', () => pick(k));
+      box.appendChild(b);
+    });
+    function pick(k) {
+      const s = ISO[k];
+      $$('.petal').forEach(x => x.classList.toggle('on', +x.dataset.k === k));
+      $('#isoPanel').innerHTML = `<p class="panel__kicker">Question centrale ${k + 1} / 7</p><h4>${s.t}</h4><p>Domaines d'action proposés pour SMAIR :</p><ul>${s.a.map(x => `<li>${x}</li>`).join('')}</ul>`;
+    }
+    pick(0);
+  })();
+
+  $('#procs').innerHTML = PROCS.map(p => `<div class="proc"><b>${icon(p.i)}${p.t}</b><p>${p.d}</p></div>`).join('');
+
+  // 05. Value chain
+  $('#chain').innerHTML = CHAIN.map((c, k) => `<button class="link${k === 7 ? ' on' : ''}" data-k="${k}"><span class="link__node">${icon(c.i)}</span><span class="link__name">${c.t}</span><span class="link__impact" title="Poids environnemental estimé"><i style="width:${c.w}%"></i></span></button>`).join('');
+  function chain(k) {
+    const c = CHAIN[k];
+    $$('.link').forEach(x => x.classList.toggle('on', +x.dataset.k === k));
+    $('#chainDetail').innerHTML = [['env', 'leaf', c.env], ['soc', 'users', c.soc], ['eco', 'coins', c.eco]]
+      .map(([p, i, txt]) => `<div class="imp"><b style="color:${PCOL[p]}">${icon(i)}${P[p]}</b><p>${txt}</p></div>`).join('');
+    $('#chainLever').innerHTML = `${icon('leaf')}<div><b>Levier proposé · ${c.t}.</b> ${c.lever}</div>`;
+  }
+  $$('.link').forEach(b => b.addEventListener('click', () => chain(+b.dataset.k)));
+  chain(7);
+
+  // 06. Eco-design ideas + filter by gain
+  $('#ideas').innerHTML = IDEAS.map(x => `<article class="idea" data-g="${x.g.join(' ')}"><span class="idea__icon">${icon(x.i)}</span><h4>${x.t}</h4><p>${x.d}</p><div class="gains">${x.g.map(g => `<span class="gain">${GAINS[g]}</span>`).join('')}</div></article>`).join('');
+  filters($('#ideaFilters'), [{ k: 'all', label: 'Toutes les pistes' }, ...Object.keys(GAINS).map(k => ({ k, label: GAINS[k] }))],
+    k => $$('.idea').forEach(el => el.classList.toggle('dim', k !== 'all' && !el.dataset.g.split(' ').includes(k))));
+
+  // 07. KPI tabs
+  const KICON = { env: 'leaf', soc: 'users', eco: 'coins', gov: 'landmark' };
+  $('#kpiTabs').innerHTML = Object.keys(KPIS).map((k, n) => `<button class="tab${n ? '' : ' on'}" data-k="${k}"><span style="color:${PCOL[k]}">${icon(KICON[k])}</span>${P[k]}</button>`).join('');
+  function kpis(k) {
+    $$('.tab').forEach(t => t.classList.toggle('on', t.dataset.k === k));
+    $('#kpis').innerHTML = KPIS[k].map((x, n) => `<div class="kpi" style="animation-delay:${n * 60}ms"><h4>${x.t}</h4><p>${x.d}</p><div class="kpi__target"><b style="color:${PCOL[k]}">${x.v}</b><span>Cible année 3<br>Suivi ${x.f.toLowerCase()}</span></div></div>`).join('');
+  }
+  $$('.tab').forEach(t => t.addEventListener('click', () => kpis(t.dataset.k)));
+  kpis('env');
+  </script>
+</body>
+</html>

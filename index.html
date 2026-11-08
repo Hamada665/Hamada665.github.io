@@ -1,0 +1,1680 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ahmed Amine Boutkhil · Portfolio</title>
+  <meta name="description" content="Élève-ingénieur en Logistique Innovante & Supply Chain (EIJV), en recherche d'alternance dès juillet 2027.">
+  <meta name="theme-color" content="#0A0A0B">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Share preview (LinkedIn, WhatsApp, e-mail...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hamada665.github.io/">
+  <meta property="og:title" content="Ahmed Amine Boutkhil · Élève-ingénieur Logistique & Supply Chain">
+  <meta property="og:description" content="Recherche d'une alternance de 24 mois dès le 1er juillet 2027. Projets, démonstrations et preuves.">
+  <meta property="og:image" content="https://hamada665.github.io/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* =====================================================================
+       Design tokens: black + dark red (no bright red)
+       ===================================================================== */
+    :root {
+      --bg: #0A0A0B;
+      --bg-2: #101012;          /* alternate section background */
+      --card: #141416;
+      --card-2: #1A1A1D;
+      --wine: #7A1A1F;          /* main dark red (buttons, fills) */
+      --wine-hover: #8E2228;
+      --wine-text: #B2454B;     /* dark red readable on black */
+      --wine-glow: rgba(122, 26, 31, .45);
+      --text: #F2F2F2;
+      --muted: #9A9A9E;
+      --faint: #5E5E63;
+      --line: #26262A;
+      --ok: #3FB46F;
+      --pad-x: clamp(16px, 8vw, 128px);
+      --radius: 10px;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: "Montserrat", system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; max-width: 100%; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    ::selection { background: var(--wine); color: #fff; }
+    [hidden] { display: none !important; }
+    .ic { width: 1em; height: 1em; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.125em; }   /* keeps hidden links hidden even with .btn styles */
+
+    /* Reveal-on-scroll animation */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* =====================================================================
+       Buttons & small UI pieces
+       ===================================================================== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 28px; border-radius: 4px;
+      font-weight: 600; font-size: .92rem; letter-spacing: .3px;
+      transition: background .25s, border-color .25s, transform .25s, color .25s;
+      white-space: nowrap;
+    }
+    .btn--solid { background: var(--wine); color: #fff; }
+    .btn--solid:hover { background: var(--wine-hover); transform: translateY(-2px); }
+    .btn--outline { border: 2px solid var(--wine); padding: 12px 26px; }
+    .btn--outline:hover { background: var(--wine); }
+    .btn--ghost { border: 1px solid var(--line); padding: 13px 24px; color: var(--muted); }
+    .btn--ghost:hover { border-color: var(--faint); color: var(--text); }
+    .btn--text { color: var(--muted); padding-left: 4px; padding-right: 4px; }
+    .btn--text:hover { color: var(--text); }
+    .btn--text::after { content: "→"; transition: transform .25s; }
+    .btn--text:hover::after { transform: translateX(4px); }
+    .btn--sm { padding: 9px 16px; font-size: .82rem; }
+
+    .chip {
+      display: inline-block; padding: 5px 12px; border-radius: 999px;
+      border: 1px solid var(--line); font-size: .78rem; color: var(--muted);
+    }
+    .eyebrow {
+      color: var(--wine-text); font-size: .78rem; font-weight: 600;
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--wine-text); }
+
+    /* =====================================================================
+       Navigation
+       ===================================================================== */
+    .nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 20px var(--pad-x);
+      border-bottom: 1px solid transparent;
+      transition: background .35s, border-color .35s, padding .35s;
+    }
+    .nav.scrolled {
+      background: rgba(10,10,11,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-color: var(--line); padding-top: 14px; padding-bottom: 14px;
+    }
+    .nav__logo { font-weight: 700; font-size: 1.45rem; letter-spacing: -1px; }
+    .nav__logo span { color: var(--wine-text); }
+    .nav__links { display: flex; gap: 36px; font-size: .88rem; letter-spacing: 1.2px; }
+    .nav__links a { opacity: .8; transition: color .25s, opacity .25s; position: relative; }
+    .nav__links a:hover { opacity: 1; }
+    .nav__links a.active { color: var(--wine-text); opacity: 1; }
+    .nav__right { justify-self: end; display: flex; align-items: center; gap: 12px; }
+    .nav__burger { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 6px; position: relative; }
+    .nav__burger span, .nav__burger span::before, .nav__burger span::after {
+      position: absolute; left: 11px; width: 18px; height: 2px; background: var(--text); content: ""; transition: transform .3s, top .3s, opacity .3s;
+    }
+    .nav__burger span { top: 19px; }
+    .nav__burger span::before { left: 0; top: -6px; }
+    .nav__burger span::after { left: 0; top: 6px; }
+    .nav.open .nav__burger span { background: transparent; }
+    .nav.open .nav__burger span::before { top: 0; transform: rotate(45deg); }
+    .nav.open .nav__burger span::after { top: 0; transform: rotate(-45deg); }
+
+    /* =====================================================================
+       Hero
+       ===================================================================== */
+    .hero {
+      position: relative; min-height: 100vh; overflow: hidden;
+      display: flex; align-items: center;
+      padding: 120px var(--pad-x) 90px;
+    }
+    .hero::before {             /* dark red glow on the left */
+      content: ""; position: absolute; z-index: 0;
+      width: 70vw; height: 90vh; left: -25vw; top: 15vh;
+      background: radial-gradient(closest-side, var(--wine-glow), transparent);
+      filter: blur(40px);
+    }
+    .hero::after {              /* subtle halo behind the head */
+      content: ""; position: absolute; z-index: 0;
+      width: 44vw; height: 44vw; right: 5vw; top: 8vh;
+      background: radial-gradient(closest-side, rgba(122,26,31,.28), transparent);
+      filter: blur(30px);
+    }
+    .hero__text { position: relative; z-index: 2; max-width: 640px; }
+    .hero__hello { color: var(--wine-text); font-size: 1.05rem; }
+    .hero__name { font-size: 1.05rem; margin-bottom: 28px; }
+    .hero__title {
+      font-size: clamp(2rem, 3.6vw, 3.1rem); font-weight: 600; line-height: 1.18;
+      letter-spacing: -.6px; margin-bottom: 24px;
+    }
+    .hero__title em { font-style: normal; color: var(--wine-text); }
+    .hero__sub { color: var(--muted); font-size: 1.02rem; max-width: 520px; margin-bottom: 26px; }
+    .avail { display: inline-flex; align-items: center; gap: 12px; font-size: .9rem; margin-bottom: 36px; }
+    .avail__dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); position: relative; }
+    .avail__dot::after {
+      content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--ok);
+      animation: pulse 2s ease-out infinite;
+    }
+    @keyframes pulse { to { transform: scale(2.8); opacity: 0; } }
+    .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+
+    /* Portrait: grayscale, blended into the black, real colors on hover */
+    .portrait {
+      position: absolute; z-index: 1;
+      right: clamp(-40px, 3vw, 100px); bottom: 0;
+      height: 92vh; max-height: 980px; aspect-ratio: 900 / 1087;
+      will-change: opacity, transform;
+    }
+    .portrait img {
+      width: 100%; height: 100%; object-fit: contain; object-position: bottom;
+      filter: grayscale(100%) contrast(1.08) brightness(.92);
+      transition: filter 1s ease;
+      -webkit-mask-image:
+        linear-gradient(to top, transparent 0%, #000 30%),
+        linear-gradient(to right, transparent 0%, #000 22%, #000 80%, transparent 100%);
+      -webkit-mask-composite: source-in;
+              mask-image:
+        linear-gradient(to top, transparent 0%, #000 30%),
+        linear-gradient(to right, transparent 0%, #000 22%, #000 80%, transparent 100%);
+              mask-composite: intersect;
+    }
+    .portrait:hover img, .portrait.is-color img { filter: grayscale(0%) contrast(1.02) brightness(1); }
+    .portrait__hint { display: none; }      /* only shown on touch screens */
+
+    .scroll-cue {
+      position: absolute; z-index: 2; left: var(--pad-x); bottom: 34px;
+      display: flex; align-items: center; gap: 12px; font-size: .72rem; letter-spacing: 2.5px; color: var(--muted);
+    }
+    .scroll-cue span { width: 40px; height: 1px; background: var(--wine-text); transform-origin: left; animation: cue 2.4s ease-in-out infinite; }
+    @keyframes cue { 0%,100% { transform: scaleX(.4); } 50% { transform: scaleX(1); } }
+
+    /* =====================================================================
+       Key figures
+       ===================================================================== */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); padding: 0 var(--pad-x); }
+    .stat { padding: 34px 10px 34px 0; border-top: 1px solid var(--line); }
+    .stat__value { font-size: 2.3rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat__value span { color: var(--wine-text); }
+    .stat__label { font-size: .85rem; color: var(--muted); margin-top: 8px; }
+
+    /* =====================================================================
+       Generic section
+       ===================================================================== */
+    .section { padding: 120px var(--pad-x); position: relative; }
+    .section--alt { background: var(--bg-2); }
+    .section__head { max-width: 640px; margin-bottom: 64px; }
+    .section__title { font-size: clamp(1.9rem, 3.2vw, 2.6rem); font-weight: 600; line-height: 1.2; margin-bottom: 14px; letter-spacing: -.5px; }
+    .section__intro { color: var(--muted); }
+
+    /* =====================================================================
+       Projects
+       ===================================================================== */
+    .project { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; margin-bottom: 140px; }
+    .project:last-child { margin-bottom: 0; }
+    .project--flip .project__visual { order: 2; }
+    .project__num { font-family: var(--mono); color: var(--faint); font-size: .85rem; margin-bottom: 10px; }
+    .project__title { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 600; line-height: 1.2; margin-bottom: 8px; }
+    .project__kicker { color: var(--wine-text); font-weight: 500; margin-bottom: 22px; }
+    .project__story { display: grid; gap: 14px; margin-bottom: 26px; }
+    .story { padding-left: 16px; border-left: 2px solid var(--line); }
+    .story b { display: block; font-size: .74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); font-weight: 600; margin-bottom: 2px; }
+    .story p { color: #CFCFD2; font-size: .95rem; }
+    .project__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .project__links { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .features { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; margin-bottom: 26px; }
+    .features li { font-size: .9rem; color: #CFCFD2; padding-left: 20px; position: relative; }
+    .screens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+    .screens button { position: relative; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; aspect-ratio: 16 / 10; transition: border-color .25s, transform .25s; }
+    .screens button:hover { border-color: var(--wine-text); transform: translateY(-3px); }
+    .screens img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+    .screens span { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 6px; font-size: .7rem; font-weight: 600; text-align: left; background: linear-gradient(transparent, rgba(10,10,11,.92)); }
+    .screens--2 { grid-template-columns: 1fr 1fr; }
+    .screens__label { margin-top: 22px; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); font-weight: 600; }
+    .sleep-note { margin-top: 14px; font-size: .78rem; color: var(--faint); max-width: 460px; }
+    .features li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 2px; background: var(--wine); }
+
+    /* Browser mockup frame (screenshots) */
+    .browser { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.55); }
+    .browser__bar { display: flex; align-items: center; gap: 7px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--card-2); }
+    .browser__bar i { width: 10px; height: 10px; border-radius: 50%; background: #2E2E33; }
+    .browser__url { margin-left: 12px; flex: 1; font-family: var(--mono); font-size: .72rem; color: var(--faint); background: var(--bg); border-radius: 4px; padding: 4px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .browser__screen { position: relative; aspect-ratio: 16 / 10; background: #0E0E10; }
+    .browser__screen > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 0; transition: opacity .4s; }
+    .browser__screen.has-img > img { opacity: 1; }
+    .browser__screen.has-img .mock { display: none; }
+    .browser__screen.has-img { aspect-ratio: auto; }
+    .browser__screen.has-img > img { position: static; height: auto; }
+
+    /* Illustrative dashboard drawn in CSS (shown until real screenshots are added) */
+    .mock { position: absolute; inset: 0; display: grid; grid-template-columns: 22% 1fr; font-size: 9px; color: var(--muted); }
+    .mock__side { background: #121214; border-right: 1px solid var(--line); padding: 12px 10px; display: grid; align-content: start; gap: 7px; }
+    .mock__logo { font-weight: 700; color: var(--text); font-size: 11px; margin-bottom: 8px; }
+    .mock__item { height: 18px; border-radius: 4px; background: #19191C; padding: 3px 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mock__item.on { background: var(--wine); color: #fff; }
+    .mock__main { padding: 14px; display: grid; grid-template-rows: auto auto 1fr; gap: 10px; }
+    .mock__kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .mock__kpi { background: #151517; border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+    .mock__kpi b { display: block; font-size: 13px; color: var(--text); }
+    .mock__chart { background: #151517; border: 1px solid var(--line); border-radius: 6px; padding: 10px; display: flex; align-items: flex-end; gap: 5%; height: 90px; }
+    .mock__chart i { flex: 1; background: linear-gradient(to top, var(--wine), #5A1418); border-radius: 2px 2px 0 0; }
+    .mock__table { background: #151517; border: 1px solid var(--line); border-radius: 6px; padding: 8px; display: grid; gap: 6px; align-content: start; }
+    .mock__row { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 6px; }
+    .mock__row span { height: 7px; border-radius: 3px; background: #222226; }
+    .mock__tag { position: absolute; right: 10px; bottom: 8px; font-size: 9px; color: var(--faint); letter-spacing: 1px; }
+
+    /* Demo access panel (recruiter credentials) */
+    .access { margin-top: 26px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); overflow: hidden; }
+    .access__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+    .access__title { font-weight: 600; font-size: .95rem; display: flex; align-items: center; gap: 10px; }
+    .access__title::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(63,180,111,.15); }
+    .tabs { display: flex; gap: 4px; background: var(--bg); border-radius: 6px; padding: 4px; }
+    .tab { padding: 6px 12px; border-radius: 4px; font-size: .8rem; color: var(--muted); transition: background .2s, color .2s; }
+    .tab[aria-selected="true"] { background: var(--wine); color: #fff; }
+    .access__body { padding: 18px; display: grid; gap: 10px; }
+    .cred { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 8px 8px 14px; }
+    .cred__label { font-size: .74rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); }
+    .cred__value { font-family: var(--mono); font-size: .9rem; overflow: hidden; text-overflow: ellipsis; }
+    .copy { font-size: .76rem; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); transition: all .2s; min-width: 74px; }
+    .copy:hover { border-color: var(--wine); color: var(--text); }
+    .copy.done { background: var(--wine); border-color: var(--wine); color: #fff; }
+    .access__role { font-size: .85rem; color: var(--muted); }
+    .access__foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 0 18px 18px; }
+    .access__note { font-size: .78rem; color: var(--faint); }
+
+    /* AI workflow simulator */
+    .flow { position: relative; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 22px; }
+    .flow__grid {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto auto;
+      gap: 34px 26px; align-items: center;
+    }
+    .flow__svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+    .flow__svg path { fill: none; stroke: #2C2C31; stroke-width: 1.5; transition: stroke .4s; }
+    .flow__svg path.lit { stroke: var(--wine-text); stroke-dasharray: 6 6; animation: dash 0.8s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -12; } }
+    .node {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 8px;
+      padding: 10px 12px; font-size: .8rem; text-align: center; line-height: 1.35;
+      transition: border-color .4s, box-shadow .4s, background .4s, opacity .4s;
+    }
+    .node small { display: block; color: var(--faint); font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+    .node.lit { border-color: var(--wine-text); box-shadow: 0 0 0 4px rgba(178,69,75,.12); background: #160D0E; }
+    .node.dim { opacity: .35; }
+    .node--ai small { color: var(--wine-text); }
+    .node--decision { transform: none; border-style: dashed; }
+    .n-in   { grid-column: 1; grid-row: 2; }
+    .n-ai   { grid-column: 2; grid-row: 2; }
+    .n-dec  { grid-column: 3; grid-row: 2; }
+    .n-rep  { grid-column: 4; grid-row: 1; }
+    .n-send { grid-column: 4; grid-row: 2; }
+    .n-alert{ grid-column: 4; grid-row: 3; }
+
+    .sim { margin-top: 18px; display: grid; gap: 12px; }
+    .sim__label { font-size: .78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); }
+    .sim__choices { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sim__choice { display: inline-flex; align-items: center; gap: 7px; font-size: .8rem; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); transition: all .2s; }
+    .sim__choice:hover { color: var(--text); border-color: var(--faint); }
+    .sim__choice.on { border-color: var(--wine); color: var(--text); background: #160D0E; }
+    .sim__out { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .bubble { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px; font-size: .86rem; min-height: 110px; }
+    .bubble b { display: block; font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--faint); margin-bottom: 6px; font-weight: 600; }
+    .verdict { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .pill { font-size: .72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: #222226; }
+    .pill--plainte { background: #3A1316; color: #E7A2A6; }
+    .pill--compliment { background: #13301F; color: #8FD9AE; }
+    .pill--question { background: #1E2433; color: #A9B8E0; }
+    .gauge { flex: 1; min-width: 90px; height: 6px; border-radius: 3px; background: #222226; overflow: hidden; }
+    .gauge i { display: block; height: 100%; width: 0; background: var(--wine-text); transition: width .8s ease; }
+    .typing { color: #CFCFD2; white-space: pre-wrap; }
+    .typing.alert { color: #E7A2A6; }
+    .sim__answer { display: flex; gap: 8px; align-items: flex-start; }
+    .sim__alert { color: #E7A2A6; font-size: 1.1rem; margin-top: 2px; }
+    .sim__disclaimer { font-size: .74rem; color: var(--faint); }
+
+    .video { margin-top: 18px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); position: relative; aspect-ratio: 16 / 9; }
+    .video video { width: 100%; height: 100%; object-fit: cover; }
+    .video__ph { position: absolute; inset: 0; display: none; place-content: center; text-align: center; gap: 10px; color: var(--muted); font-size: .9rem; padding: 20px;
+      background: repeating-linear-gradient(135deg, #121214 0 14px, #141417 14px 28px); }
+    .video.missing .video__ph { display: grid; }
+    .video.missing video { display: none; }
+    .play { width: 58px; height: 58px; border-radius: 50%; border: 2px solid var(--wine-text); margin: 0 auto; position: relative; }
+    .play::after { content: ""; position: absolute; left: 23px; top: 18px; border-left: 16px solid var(--wine-text); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+
+    /* Logistics database: flow of tables */
+    .db { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 22px; }
+    .db__chain { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; counter-reset: t; }
+    .table {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: .78rem;
+      transition: border-color .3s, transform .3s;
+    }
+    .table:hover { border-color: var(--wine-text); transform: translateY(-3px); }
+    .table__name { padding: 8px 12px; background: #19191C; font-weight: 600; display: flex; justify-content: space-between; }
+    .table__name::after { counter-increment: t; content: "0" counter(t); font-family: var(--mono); color: var(--faint); font-weight: 400; }
+    .table__fields { padding: 8px 12px; font-family: var(--mono); color: var(--muted); display: grid; gap: 3px; font-size: .72rem; }
+    .table__fields .pk { color: var(--wine-text); }
+    .db__legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-size: .78rem; color: var(--faint); }
+    .db__legend span::before { content: "● "; color: var(--wine-text); }
+
+    /* PFE study steps */
+    .steps { display: grid; gap: 12px; counter-reset: s; }
+    .step { display: grid; grid-template-columns: 46px 1fr; gap: 16px; align-items: start; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    .step::before { counter-increment: s; content: counter(s); width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--wine); color: var(--wine-text); font-weight: 600; }
+    .step b { display: block; margin-bottom: 2px; }
+    .step p { color: var(--muted); font-size: .88rem; }
+
+    /* =====================================================================
+       Timeline (parcours)
+       ===================================================================== */
+    .timeline { position: relative; max-width: 980px; }
+    .timeline::before { content: ""; position: absolute; left: 150px; top: 6px; bottom: 6px; width: 1px; background: linear-gradient(var(--wine-text), var(--line) 85%, transparent); }
+    .tl { display: grid; grid-template-columns: 150px 1fr; gap: 0 44px; padding-bottom: 48px; position: relative; }
+    .tl::before { content: ""; position: absolute; left: 145px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--bg-2); border: 2px solid var(--wine-text); }
+    .tl__date { font-family: var(--mono); font-size: .82rem; color: var(--muted); padding-top: 1px; padding-right: 24px; text-align: right; }
+    .tl__title { font-weight: 600; font-size: 1.08rem; }
+    .tl__org { color: var(--wine-text); font-size: .9rem; margin-bottom: 6px; }
+    .tl__text { color: var(--muted); font-size: .92rem; max-width: 620px; }
+    .tl__proof { display: inline-flex; margin-top: 10px; font-size: .8rem; color: var(--text); border-bottom: 1px solid var(--wine-text); padding-bottom: 1px; }
+    .tl__proof:hover { color: var(--wine-text); }
+    .tl--future::before { border-style: dashed; background: transparent; }
+    .tl--future .tl__title { color: var(--muted); }
+
+    /* =====================================================================
+       Proofs (documents)
+       ===================================================================== */
+    .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 22px; }
+    .doc {
+      position: relative; text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 0; overflow: hidden; transition: border-color .3s, transform .3s; display: flex; flex-direction: column;
+    }
+    .doc:hover { border-color: var(--wine); transform: translateY(-5px); }
+    .doc__paper { /* stylized sheet of paper */
+      margin: 22px 22px 0; height: 130px; border-radius: 4px 4px 0 0; background: #E9E7E2; position: relative; overflow: hidden;
+      box-shadow: 0 -6px 20px rgba(0,0,0,.35); transition: transform .4s;
+    }
+    .doc:hover .doc__paper { transform: translateY(-6px); }
+    /* Real first-page preview when available */
+    .doc__paper.has-thumb { background: #E9E7E2 var(--thumb) center top / cover no-repeat; }
+    .doc__paper.has-thumb::before { display: none; }
+    .doc__paper::before { /* text lines on the sheet */
+      content: ""; position: absolute; left: 16px; right: 40px; top: 18px; height: 90px;
+      background: repeating-linear-gradient(#C9C6BF 0 3px, transparent 3px 12px);
+    }
+    .doc__seal { position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%; background: var(--wine); display: grid; place-items: center; color: #fff; font-size: 15px; box-shadow: 0 0 0 3px rgba(122,26,31,.25); }
+    .doc__body { padding: 16px 20px 20px; border-top: 1px solid var(--line); flex: 1; display: flex; flex-direction: column; }
+    .doc__kind { font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--wine-text); font-weight: 600; }
+    .doc__title { font-weight: 600; margin: 4px 0 4px; }
+    .doc__meta { color: var(--muted); font-size: .84rem; flex: 1; }
+    .doc__cta { margin-top: 12px; font-size: .8rem; color: var(--text); }
+    .doc__cta::after { content: " →"; }
+    .doc.missing { cursor: default; }
+    .doc.missing:hover { transform: none; border-color: var(--line); }
+    .doc.missing .doc__cta { color: var(--faint); }
+    .doc.missing .doc__cta::after { content: ""; }
+    .doc.missing .doc__seal { background: #2A2A2E; box-shadow: none; }
+
+    /* PDF viewer dialog */
+    dialog.viewer { width: min(1000px, 94vw); height: min(88vh, 1100px); margin: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--text); padding: 0; overflow: hidden; }
+    dialog.viewer::backdrop { background: rgba(0,0,0,.75); backdrop-filter: blur(4px); }
+    .viewer__bar { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+    .viewer__title { flex: 1; font-weight: 600; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .viewer__close { width: 36px; height: 36px; border-radius: 6px; border: 1px solid var(--line); font-size: 18px; display: grid; place-items: center; }
+    .viewer__close:hover { border-color: var(--wine); }
+    .viewer iframe { width: 100%; height: calc(100% - 61px); border: 0; background: #2A2A2E; }
+
+    /* =====================================================================
+       Skills
+       ===================================================================== */
+    .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .skill { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+    .skill__title { font-weight: 600; margin-bottom: 4px; }
+    .skill__sub { color: var(--muted); font-size: .85rem; margin-bottom: 16px; }
+    .skill__list { list-style: none; display: grid; gap: 8px; }
+    .skill__list li { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; padding-bottom: 8px; border-bottom: 1px dashed var(--line); }
+    .skill__list li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .skill__list a { font-size: .75rem; color: var(--wine-text); white-space: nowrap; }
+    .skill__list a:hover { text-decoration: underline; }
+
+    /* =====================================================================
+       Engagement
+       ===================================================================== */
+    .engage { display: grid; grid-template-columns: 1.2fr 1fr; gap: 22px; }
+    .engage__card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; position: relative; overflow: hidden; }
+    /* President card: club photo fused into the card (grayscale, faded into the dark) */
+    .engage__card--photo { padding-right: 47%; min-height: 320px; }
+    .engage__photo {
+      position: absolute; top: 0; right: 0; width: 60%; height: 100%; object-fit: cover; object-position: center 45%;
+      filter: grayscale(100%) brightness(.72) contrast(1.05); transition: filter .9s ease;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 60%); mask-image: linear-gradient(to right, transparent 0%, #000 60%);
+    }
+    .engage__card--photo:hover .engage__photo { filter: grayscale(0%) brightness(.9); }
+    .engage__card--photo > *:not(.engage__photo) { position: relative; z-index: 1; }
+    .engage__card--photo::after { display: none; }
+    .engage__card::after { content: attr(data-big); position: absolute; right: -10px; bottom: -40px; font-size: 9rem; font-weight: 700; color: rgba(255,255,255,.025); line-height: 1; pointer-events: none; }
+    .engage__role { font-size: .74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--wine-text); font-weight: 600; }
+    .engage__title { font-size: 1.35rem; font-weight: 600; margin: 6px 0 10px; }
+    .engage__text { color: var(--muted); font-size: .93rem; margin-bottom: 18px; }
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .gallery__item { aspect-ratio: 4/3; border-radius: 6px; overflow: hidden; background: repeating-linear-gradient(135deg, #121214 0 10px, #151518 10px 20px); position: relative; border: 1px solid var(--line); }
+    .gallery__item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter .6s, transform .6s; }
+    .gallery__item:hover img { filter: grayscale(0); transform: scale(1.04); }
+    .gallery__item span { position: absolute; inset: 0; display: grid; place-items: center; font-size: .72rem; color: var(--faint); }
+    .gallery__item.has-img span { display: none; }
+
+    /* =====================================================================
+       Contact
+       ===================================================================== */
+    .contact { text-align: center; padding: 150px var(--pad-x); position: relative; overflow: hidden; }
+    .contact::before { content: ""; position: absolute; left: 50%; top: 50%; width: 80vw; height: 60vh; transform: translate(-50%,-50%); background: radial-gradient(closest-side, rgba(122,26,31,.30), transparent); filter: blur(30px); }
+    .contact > * { position: relative; }
+    .contact .eyebrow { justify-content: center; }
+    .contact__title { font-size: clamp(2rem, 4.4vw, 3.6rem); font-weight: 600; line-height: 1.15; letter-spacing: -1px; max-width: 900px; margin: 0 auto 22px; }
+    .contact__title em { font-style: normal; color: var(--wine-text); }
+    .contact__sub { color: var(--muted); max-width: 560px; margin: 0 auto 40px; }
+    .contact__mail { display: inline-flex; align-items: center; gap: 14px; font-size: clamp(1rem, 2.2vw, 1.4rem); font-weight: 500; padding: 16px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(20,20,22,.7); margin-bottom: 30px; max-width: 100%; }
+    .contact__mail span { overflow: hidden; text-overflow: ellipsis; }
+    .contact__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .footer { border-top: 1px solid var(--line); padding: 26px var(--pad-x); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--faint); }
+    .footer a:hover { color: var(--text); }
+
+    /* Toast */
+    .toast { position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 20px); background: var(--card-2); border: 1px solid var(--line); padding: 10px 18px; border-radius: 999px; font-size: .85rem; opacity: 0; transition: all .3s; z-index: 80; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+
+    /* =====================================================================
+       Key numbers inside a project
+       ===================================================================== */
+    .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+    .kpi b { display: block; font-size: 1.6rem; line-height: 1.1; color: var(--text); }
+    .kpi span { font-size: .76rem; color: var(--muted); }
+
+    /* =====================================================================
+       Deck preview (stacked slides + thumbnails)
+       ===================================================================== */
+    .deck { position: relative; }
+    .deck__stack { position: relative; display: block; width: 100%; padding: 0; text-align: left; }
+    .deck__stack::before, .deck__stack::after {           /* sheets behind the cover */
+      content: ""; position: absolute; left: 4%; right: 4%; top: -10px; height: 40px;
+      border-radius: var(--radius) var(--radius) 0 0; background: #1C1C20; border: 1px solid var(--line); z-index: 0;
+    }
+    .deck__stack::after { left: 8%; right: 8%; top: -20px; background: #151518; }
+    .deck__cover {
+      position: relative; z-index: 1; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line);
+      aspect-ratio: 16 / 9; background: var(--card); box-shadow: 0 30px 80px rgba(0,0,0,.55);
+    }
+    .deck__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .deck__stack:hover .deck__cover img { transform: scale(1.03); }
+    .deck__badge {
+      position: absolute; z-index: 2; left: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(10,10,11,.86); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 999px;
+      padding: 8px 16px 8px 10px; font-size: .82rem; font-weight: 500; transition: background .25s, border-color .25s;
+    }
+    .deck__badge i { width: 26px; height: 26px; border-radius: 50%; background: var(--wine); display: grid; place-items: center; font-style: normal; font-size: .7rem; }
+    .deck__stack:hover .deck__badge { border-color: var(--wine); }
+    .deck__thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+    .deck__thumbs button { border-radius: 6px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 16 / 9; transition: border-color .25s, transform .25s; }
+    .deck__thumbs button:hover { border-color: var(--wine-text); transform: translateY(-3px); }
+    .deck__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* =====================================================================
+       Other work cards
+       ===================================================================== */
+    .works { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+    .work { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: border-color .3s, transform .3s; }
+    .work:hover { border-color: var(--wine); transform: translateY(-4px); }
+    .work__cover { display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); background: #0E0E10; }
+    .work__cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+    .work:hover .work__cover img { transform: scale(1.04); }
+    .work__cover--doc { display: grid; place-content: center; gap: 10px; text-align: center; background: repeating-linear-gradient(135deg, #121214 0 14px, #151518 14px 28px); }
+    .work__docicon { width: 54px; height: 66px; margin: 0 auto; border-radius: 4px; background: #E9E7E2; color: var(--wine); font-weight: 700; font-size: .8rem; display: grid; place-items: end center; padding-bottom: 10px; }
+    .work__doclabel { font-size: .8rem; color: var(--muted); }
+    .work__body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+    .work__meta { font-size: .7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--wine-text); font-weight: 600; }
+    .work__title { font-size: 1.08rem; font-weight: 600; margin: 6px 0 8px; }
+    .work__text { color: var(--muted); font-size: .88rem; flex: 1; margin-bottom: 16px; }
+    .work__links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .tl__actions { display: flex; flex-wrap: wrap; gap: 18px; }
+
+    /* RSE note: compact summary on the home page */
+    .rsebrief { margin-top: 120px; border: 1px solid var(--line); border-left: 3px solid #5FA77A; border-radius: var(--radius); background: var(--card); padding: 30px 32px; }
+    .rsebrief__head { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+    .rsebrief__icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; background: #0F1A13; color: #5FA77A; font-size: 1.25rem; border: 1px solid #22332A; }
+    .rsebrief .project__num { margin-bottom: 2px; }
+    .rsebrief__title { font-size: 1.3rem; font-weight: 600; line-height: 1.25; }
+    .rsebrief__text { color: #CFCFD2; font-size: .95rem; max-width: 900px; }
+    .rsebrief__points { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; margin: 20px 0 24px; }
+    .rsebrief__points li { font-size: .88rem; color: var(--muted); }
+    .rsebrief__points b { display: block; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; color: #5FA77A; margin-bottom: 2px; }
+    .rsebrief__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line); }
+    .rsebrief__btn:hover { border-color: #5FA77A; color: var(--text); }
+    @media (max-width: 860px) { .rsebrief { padding: 24px 20px; margin-top: 90px; } .rsebrief__points { grid-template-columns: 1fr; } .rsebrief__btn { width: 100%; white-space: normal; text-align: center; } }
+
+    /* "Coming soon" panel (project in progress) */
+    .soon { position: relative; overflow: hidden; border: 1px dashed #34343A; border-radius: var(--radius); padding: 56px 28px; text-align: center;
+      background: radial-gradient(closest-side at 50% 0%, rgba(122,26,31,.22), transparent), repeating-linear-gradient(135deg, #111113 0 16px, #131316 16px 32px); }
+    .soon__icon { width: 64px; height: 64px; margin: 0 auto 18px; border-radius: 50%; border: 1px solid var(--wine); display: grid; place-items: center; color: var(--wine-text); font-size: 1.6rem; background: #140C0D; }
+    .soon__label { display: inline-flex; align-items: center; gap: 8px; font-size: .74rem; letter-spacing: 2px; text-transform: uppercase; color: var(--wine-text); font-weight: 600; }
+    .soon__title { font-size: 1.5rem; font-weight: 600; margin: 8px 0 6px; }
+    .soon__text { color: var(--muted); font-size: .9rem; max-width: 340px; margin: 0 auto 22px; }
+    .soon__bar { width: 180px; height: 3px; margin: 0 auto; border-radius: 2px; background: var(--line); overflow: hidden; }
+    .soon__bar i { display: block; width: 40%; height: 100%; background: var(--wine-text); animation: soon 2.2s ease-in-out infinite; }
+    @keyframes soon { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+
+
+
+    /* =====================================================================
+       Slide viewer (full-screen dialog)
+       ===================================================================== */
+    dialog.slides { width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; margin: 0; border: 0; padding: 0; background: rgba(8,8,9,.97); color: var(--text); overflow: hidden; }
+    dialog.slides::backdrop { background: rgba(0,0,0,.85); }
+    .slides__wrap { height: 100%; width: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr); }   /* minmax(0) stops the thumbnail strip from widening the grid */
+    .slides__bar { display: flex; align-items: center; gap: 12px; padding: 14px clamp(14px, 3vw, 32px); border-bottom: 1px solid var(--line); }
+    .slides__title { flex: 1; min-width: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .slides__count { font-family: var(--mono); font-size: .82rem; color: var(--muted); }
+    .slides__stage { position: relative; display: grid; place-items: center; padding: 18px clamp(14px, 6vw, 90px); min-height: 0; overflow: hidden; touch-action: pan-y; }
+    .slides__img { max-width: 100%; max-height: calc(100vh - 200px); max-height: calc(100dvh - 200px);   /* fits portrait photos too */ border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,.6); transition: opacity .25s; user-select: none; -webkit-user-drag: none; }
+    .slides__img.fade { opacity: 0; }
+    .slides__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: rgba(20,20,22,.85); font-size: 1.3rem; display: grid; place-items: center; transition: border-color .2s, background .2s; }
+    .slides__nav:hover { border-color: var(--wine); background: var(--wine); }
+    .slides__nav:disabled { opacity: .25; pointer-events: none; }
+    .slides__prev { left: clamp(8px, 2vw, 24px); }
+    .slides__next { right: clamp(8px, 2vw, 24px); }
+    .slides__strip { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding: 12px clamp(14px, 3vw, 32px) 16px; border-top: 1px solid var(--line); scrollbar-width: thin; }
+    .slides__strip button { flex: 0 0 auto; width: 112px; height: 63px; border-radius: 4px; overflow: hidden; border: 2px solid transparent; opacity: .55; transition: opacity .2s, border-color .2s; }
+    .slides__strip button.on { border-color: var(--wine-text); opacity: 1; }
+    .slides__strip button:hover { opacity: 1; }
+    .slides__strip img { width: 100%; height: 100%; object-fit: cover; }
+    .slides__strip.is-portrait button { width: 54px; height: 72px; }
+    .slides__progress { height: 2px; background: var(--line); }
+    .slides__progress i { display: block; height: 100%; background: var(--wine-text); transition: width .3s; }
+    .slides__rotate { display: none; }
+    @media (max-width: 860px) and (orientation: portrait) {
+      .slides__rotate { display: block; position: absolute; left: 0; right: 0; bottom: 18%; text-align: center; font-size: .78rem; color: var(--muted); padding: 0 20px; }
+    }
+    @media (max-width: 860px) {
+      .kpis { grid-template-columns: 1fr 1fr 1fr; }
+      .kpi b { font-size: 1.25rem; }
+      .slides__nav { display: none; }            /* swipe on mobile */
+      .slides__strip button { width: 84px; height: 47px; }
+      .slides__bar .btn--ghost { display: none; }
+      .deck__thumbs { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    }
+
+    /* =====================================================================
+       Responsive
+       ===================================================================== */
+    @media (max-width: 1180px) {
+      .nav__links { gap: 22px; }
+      .portrait { height: 76vh; right: -6vw; }
+      .project { grid-template-columns: 1fr; gap: 40px; }
+      .project--flip .project__visual { order: 0; }
+    }
+    @media (max-width: 860px) {
+      :root { --pad-x: 20px; }
+      .nav { grid-template-columns: 1fr auto; }
+      .nav__links {
+        position: fixed; inset: 64px 0 auto 0; flex-direction: column; gap: 0;
+        background: rgba(10,10,11,.97); border-bottom: 1px solid var(--line);
+        padding: 8px 20px 20px; transform: translateY(-120%); transition: transform .35s; z-index: -1;
+      }
+      .nav__links a { padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1rem; }
+      .nav.open .nav__links { transform: none; }
+      .nav.open { background: rgba(10,10,11,.97); }
+      .nav__burger { display: block; }
+      .nav__right .btn { display: none; }
+
+      .hero { flex-direction: column; justify-content: flex-end; padding-top: 0; padding-bottom: 70px; min-height: auto; }
+      .portrait { position: relative; right: auto; bottom: auto; height: auto; width: min(420px, 100%); margin: 74px auto -70px; }
+      .portrait img {
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 40%), linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+        -webkit-mask-composite: source-in;
+                mask-image: linear-gradient(to top, transparent 0%, #000 40%), linear-gradient(to right, transparent 0%, #000 18%, #000 82%, transparent 100%);
+                mask-composite: intersect;
+      }
+      .portrait__hint { position: absolute; top: 24px; right: 6px; font-size: .68rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); transition: opacity .4s; }
+      .portrait.is-color .portrait__hint { opacity: 0; }
+      .hero::after { right: -20vw; width: 100vw; height: 100vw; top: 5vh; }
+      .scroll-cue { display: none; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 90px var(--pad-x); }
+      .features { grid-template-columns: 1fr; }
+      .project__visual, .project--flip .project__visual { order: 2; }
+      .cred { grid-template-columns: 1fr auto; }
+      .cred__label { grid-column: 1 / -1; }
+      .flow__svg { display: none; }
+      .flow__grid { grid-template-columns: 1fr; gap: 10px; }
+      .n-in, .n-ai, .n-dec, .n-rep, .n-send, .n-alert { grid-column: 1; grid-row: auto; }
+      .node { position: relative; }
+      .sim__out { grid-template-columns: 1fr; }
+      .db__chain { grid-template-columns: 1fr 1fr; }
+      .timeline::before { left: 5px; }
+      .tl { grid-template-columns: 1fr; padding-left: 30px; }
+      .tl::before { left: 0; }
+      .tl__date { text-align: left; padding: 0 0 4px; }
+      .engage { grid-template-columns: 1fr; }
+      .engage__card--photo { padding-right: 30px; padding-top: 235px; }
+      .engage__photo { width: 100%; height: 250px; filter: grayscale(0%) brightness(.8);
+        -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); }
+    }
+    @media (max-width: 480px) {
+      .db__chain { grid-template-columns: 1fr; }
+      .stat__value { font-size: 1.9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Icon set: line icons, inherit the current text color -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></symbol>
+      <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+      <symbol id="i-meh" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></symbol>
+      <symbol id="i-siren" viewBox="0 0 24 24"><path d="M7 18v-6a5 5 0 0 1 10 0v6"/><path d="M5 21a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.9 4.9.7.7"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+      <symbol id="i-rotate" viewBox="0 0 24 24"><rect x="4" y="2" width="12" height="20" rx="2"/><path d="M20 15a8 8 0 0 1-4 5"/><polyline points="20 19 16 20 17 16"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><polygon points="7 4 19 12 7 20 7 4" fill="currentColor"/></symbol>
+      <symbol id="i-arrow-up" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+      <symbol id="i-hammer" viewBox="0 0 24 24"><path d="m15 12-8.4 8.4a2.1 2.1 0 0 1-3-3L12 9"/><path d="M17.6 15 22 10.6"/><path d="m20.9 11.6-1.3-1.3a2 2 0 0 1-.6-1.4V7.4l-2.3-2.3a5.6 5.6 0 0 0-4-1.6H9l.9.8a6.2 6.2 0 0 1 2.1 4.6V10l2 2h2.2a2 2 0 0 1 1.4.6l1.2 1.3"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+      <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- =====================================================================
+       NAVIGATION
+       ===================================================================== -->
+  <nav class="nav" id="nav">
+    <a href="#top" class="nav__logo">AB<span>.</span></a>
+    <div class="nav__links" id="navLinks">
+      <a href="#top" data-spy="top">Accueil</a>
+      <a href="#projets" data-spy="projets">Projets</a>
+      <a href="#parcours" data-spy="parcours">Parcours</a>
+      <a href="#preuves" data-spy="preuves">Preuves</a>
+      <a href="#competences" data-spy="competences">Compétences</a>
+    </div>
+    <div class="nav__right">
+      <a href="#contact" class="btn btn--outline btn--sm" data-spy="contact">Contact</a>
+      <button class="nav__burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><span></span></button>
+    </div>
+  </nav>
+
+  <!-- =====================================================================
+       HERO
+       ===================================================================== -->
+  <header class="hero" id="top">
+    <div class="portrait" id="portrait">
+      <img src="portrait.webp" alt="Portrait d'Ahmed Amine Boutkhil" width="900" height="1087">
+      <span class="portrait__hint">Touchez la photo</span>
+    </div>
+
+    <div class="hero__text">
+      <p class="hero__hello">Bonjour,</p>
+      <p class="hero__name">Je suis Ahmed Amine Boutkhil</p>
+      <h1 class="hero__title">J'optimise les flux et je construis les outils qui font <em>avancer la supply chain</em>.</h1>
+      <p class="hero__sub">Élève-ingénieur en Logistique Innovante &amp; Supply Chain à l'EIJV, entre recherche opérationnelle, data et développement.</p>
+      <p class="avail"><span class="avail__dot"></span><span>Disponible en alternance (24 mois) dès le <strong>1<sup>er</sup>&nbsp;juillet&nbsp;2027</strong></span></p>
+      <div class="hero__actions">
+        <a href="#projets" class="btn btn--solid">Voir mes projets</a>
+        <a href="CV_Ahmed_Amine_Boutkhil.pdf" class="btn btn--text" download>Télécharger mon CV</a>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span></span>DÉFILER</div>
+  </header>
+
+  <!-- Key figures -->
+  <div class="stats">
+    <div class="stat reveal"><div class="stat__value"><b data-count="2">0</b><span>×</span></div><div class="stat__label">Major de promotion</div></div>
+    <div class="stat reveal"><div class="stat__value"><b data-count="220">0</b><span>+</span></div><div class="stat__label">Tests automatisés</div></div>
+    <div class="stat reveal"><div class="stat__value"><b data-count="2">0</b></div><div class="stat__label">Stages · France &amp; Maroc</div></div>
+    <div class="stat reveal"><div class="stat__value"><b data-count="6">0</b></div><div class="stat__label">Projets présentés</div></div>
+  </div>
+
+  <!-- =====================================================================
+       PROJECTS
+       ===================================================================== -->
+  <section class="section" id="projets">
+    <div class="section__head reveal">
+      <p class="eyebrow">Réalisations</p>
+      <h2 class="section__title">Des projets concrets, que vous pouvez tester.</h2>
+      <p class="section__intro">Chaque projet suit la même logique : un problème réel, une solution construite de bout en bout, et une preuve accessible en un clic.</p>
+    </div>
+
+    <!-- ===== Project 01: Mebutik Sports ===== -->
+    <article class="project" id="mebutik">
+      <div class="project__visual reveal">
+        <div class="browser">
+          <div class="browser__bar"><i></i><i></i><i></i><span class="browser__url" id="demoUrlLabel">mebutik · gestion du stock</span></div>
+          <div class="browser__screen" data-img>
+            <!-- Real screenshot; the CSS mock below is only shown if this file is missing -->
+            <img src="images/mebutik-dashboard.webp" alt="Page Stock de l'application Mebutik Sports" loading="lazy">
+            <div class="mock" aria-hidden="true">
+              <div class="mock__side">
+                <div class="mock__logo">Mebutik</div>
+                <div class="mock__item on">Tableau de bord</div>
+                <div class="mock__item">Caisse</div>
+                <div class="mock__item">Stock</div>
+                <div class="mock__item">Ventes</div>
+                <div class="mock__item">Rapports</div>
+              </div>
+              <div class="mock__main">
+                <div class="mock__kpis">
+                  <div class="mock__kpi">Ventes du jour<b>—</b></div>
+                  <div class="mock__kpi">Articles vendus<b>—</b></div>
+                  <div class="mock__kpi">Stock bas<b>—</b></div>
+                </div>
+                <div class="mock__chart"><i style="height:40%"></i><i style="height:65%"></i><i style="height:52%"></i><i style="height:80%"></i><i style="height:70%"></i><i style="height:92%"></i><i style="height:60%"></i></div>
+                <div class="mock__table">
+                  <div class="mock__row"><span></span><span></span><span></span></div>
+                  <div class="mock__row"><span></span><span></span><span></span></div>
+                  <div class="mock__row"><span></span><span></span><span></span></div>
+                  <div class="mock__row"><span></span><span></span><span></span></div>
+                </div>
+              </div>
+              <span class="mock__tag">MAQUETTE ILLUSTRATIVE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Screens of the app, opened in the slide viewer -->
+        <div class="screens">
+          <button data-deck-open="mebutik" data-start="1"><img data-deck-thumb="mebutik" data-i="1" data-thumb alt=""><span>Stock</span></button>
+          <button data-deck-open="mebutik" data-start="2"><img data-deck-thumb="mebutik" data-i="2" data-thumb alt=""><span>Tableau de bord</span></button>
+          <button data-deck-open="mebutik" data-start="3"><img data-deck-thumb="mebutik" data-i="3" data-thumb alt=""><span>Caisse</span></button>
+          <button data-deck-open="mebutik" data-start="4"><img data-deck-thumb="mebutik" data-i="4" data-thumb alt=""><span>Rapports</span></button>
+        </div>
+
+        <!-- Recruiter demo access (shown only when CONFIG.demoUrl is set) -->
+        <div class="access" id="access" hidden>
+          <div class="access__head">
+            <span class="access__title">Accès démo recruteur</span>
+            <div class="tabs" role="tablist" aria-label="Choisir un rôle">
+              <button class="tab" role="tab" aria-selected="true" data-role="admin">Admin</button>
+              <button class="tab" role="tab" aria-selected="false" data-role="manager">Manager</button>
+              <button class="tab" role="tab" aria-selected="false" data-role="employee">Employé</button>
+            </div>
+          </div>
+          <div class="access__body">
+            <p class="access__role" id="roleDesc"></p>
+            <div class="cred"><span class="cred__label">Identifiant</span><span class="cred__value" id="credUser"></span><button class="copy" data-copy="credUser">Copier</button></div>
+            <div class="cred"><span class="cred__label">Mot de passe</span><span class="cred__value" id="credPass"></span><button class="copy" data-copy="credPass">Copier</button></div>
+          </div>
+          <div class="access__foot">
+            <span class="access__note">Hébergement gratuit : le premier chargement peut prendre ~30 s.</span>
+            <a class="btn btn--solid btn--sm" id="demoBtn" href="#" target="_blank" rel="noopener">Ouvrir la démo <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project__info reveal">
+        <p class="project__num">01 — Application web</p>
+        <h3 class="project__title">Mebutik Sports</h3>
+        <p class="project__kicker">Le back-office complet d'une boutique de maillots de sport.</p>
+        <div class="project__story">
+          <div class="story"><b>Besoin</b><p>Une boutique de maillots de sport avait besoin d'un seul outil pour la caisse, le stock, les ventes et le suivi des coûts.</p></div>
+          <div class="story"><b>Ma solution</b><p>J'ai conçu et développé l'application de bout en bout : base de données, serveur, interface et déploiement.</p></div>
+          <div class="story"><b>Résultat</b><p>Une application en ligne, utilisable sur ordinateur et téléphone, vérifiée par plus de 220 tests automatisés à chaque mise à jour.</p></div>
+        </div>
+        <ul class="features">
+          <li>Caisse avec scan de codes-barres</li>
+          <li>Stocks et mouvements de stock</li>
+          <li>Ventes, coûts et rapports</li>
+          <li>Tableaux de bord (Chart.js)</li>
+          <li>Alertes de stock bas et de rupture</li>
+          <li>Exports Excel, CSV et PDF</li>
+          <li>3 rôles et permissions</li>
+          <li>Notifications et recherche en direct</li>
+        </ul>
+        <div class="project__chips">
+          <span class="chip">Python · Flask</span><span class="chip">PostgreSQL</span><span class="chip">SQLAlchemy</span>
+          <span class="chip">JavaScript</span><span class="chip">Jinja</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span><span class="chip">Render</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== Project 02: AI review workflow ===== -->
+    <article class="project project--flip" id="avis-ia">
+      <div class="project__visual reveal">
+        <div class="flow" id="flow">
+          <svg class="flow__svg" id="flowSvg" aria-hidden="true"></svg>
+          <div class="flow__grid">
+            <div class="node n-in" data-node="in"><small>Entrée</small>Avis client reçu</div>
+            <div class="node node--ai n-ai" data-node="ai"><small>IA</small>Type + intensité /10</div>
+            <div class="node node--decision n-dec" data-node="dec"><small>Décision</small>Plainte grave&nbsp;?</div>
+            <div class="node node--ai n-rep" data-node="rep"><small>IA · Non</small>Rédige la réponse</div>
+            <div class="node n-send" data-node="send"><small>Sortie</small>Réponse envoyée au client</div>
+            <div class="node n-alert" data-node="alert"><small>Oui</small>Alerte urgente au responsable</div>
+          </div>
+
+          <div class="sim">
+            <span class="sim__label">Testez le scénario avec un avis</span>
+            <div class="sim__choices" id="simChoices"></div>
+            <div class="sim__out">
+              <div class="bubble"><b>Avis client</b><span id="simReview" class="typing">Choisissez un avis ci-dessus.</span></div>
+              <div class="bubble">
+                <b>Analyse &amp; action</b>
+                <div class="verdict"><span class="pill" id="simType">—</span><span class="gauge"><i id="simGauge"></i></span><span id="simScore" style="font-family:var(--mono);font-size:.8rem">–/10</span></div>
+                <span class="sim__answer"><svg class="ic sim__alert" id="simAlertIcon" style="display:none" aria-hidden="true"><use href="#i-alert"/></svg><span id="simAnswer" class="typing"></span></span>
+              </div>
+            </div>
+            <span class="sim__disclaimer">Simulation illustrative du fonctionnement. La démonstration réelle (1 min 20, sous-titrée) est dans la vidéo ci-dessous.</span>
+          </div>
+        </div>
+
+        <div class="video" id="videoBox">
+          <!-- Edited screen recording (silent, captioned) -->
+          <video controls preload="none" playsinline poster="images/n8n-poster.webp">
+            <source src="videos/n8n-demo.mp4" type="video/mp4">
+          </video>
+          <div class="video__ph"><div class="play"></div><span>Vidéo de démonstration du workflow n8n<br><small style="color:var(--faint)">bientôt disponible</small></span></div>
+        </div>
+      </div>
+
+      <div class="project__info reveal">
+        <p class="project__num">02 — PFE · Étude &amp; automatisation IA</p>
+        <h3 class="project__title">Gestion intelligente des avis clients</h3>
+        <p class="project__kicker">De l'étude terrain à la solution automatisée, sans jamais laisser l'IA gérer une crise seule.</p>
+        <div class="kpis">
+          <div class="kpi"><b>209</b><span>répondants au questionnaire</span></div>
+          <div class="kpi"><b>10</b><span>entretiens avec des restaurateurs</span></div>
+          <div class="kpi"><b>1</b><span>workflow n8n déployé</span></div>
+        </div>
+        <div class="project__story">
+          <div class="story"><b>L'étude</b><p>Comment les avis en ligne influencent-ils le choix des restaurants marocains ? Analyse quantitative (SPSS), qualitative (NVivo) et tests d'hypothèses, restitués en tableaux de bord.</p></div>
+          <div class="story"><b>Ma solution</b><p>Un workflow automatisé : une IA classe chaque avis (plainte, compliment ou question), lui attribue une intensité sur 10, puis rédige une réponse adaptée.</p></div>
+          <div class="story"><b>Le point clé</b><p>Quand une plainte est trop grave, l'IA ne répond pas : le système envoie une alerte urgente au responsable, qui prend la main.</p></div>
+          <div class="story"><b>La démonstration</b><p>Le prototype a été testé sur un cas d'exemple, un salon de thé marocain : analyse via Telegram, e-mail de synthèse, suivi dans Google Sheets et rapports archivés sur Drive.</p></div>
+        </div>
+        <div class="project__chips">
+          <span class="chip">n8n</span><span class="chip">IA générative</span><span class="chip">SPSS</span><span class="chip">NVivo</span><span class="chip">Power BI</span>
+        </div>
+        <div class="project__links">
+          <button class="btn btn--solid" data-deck-open="pfe">Voir la soutenance</button>
+          <button class="btn btn--text" data-open-doc="documents/rapport-pfe.pdf" data-doc-title="Rapport de PFE">Rapport (PDF)</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== Project 03: Spill The Tea (entrepreneurship) ===== -->
+    <article class="project" id="spill">
+      <div class="project__visual reveal">
+        <div class="deck" data-deck-preview="spill-the-tea" data-cover="5" data-thumbs="3,7,8,17"></div>
+      </div>
+      <div class="project__info reveal">
+        <p class="project__num">03 — Entrepreneuriat · chef de projet, équipe de 2</p>
+        <h3 class="project__title">Spill The Tea</h3>
+        <p class="project__kicker">Une marque de thé, une application et un business plan : un projet d'entreprise complet.</p>
+        <div class="project__story">
+          <div class="story"><b>Le concept</b><p>Une marque de thé qui transforme le moment du thé en expérience sociale : chaque sachet révèle une anecdote à partager dans une application communautaire.</p></div>
+          <div class="story"><b>Ce que nous avons construit</b><p>Identité de marque, coffrets, maquettes de l'application, site web, affiches Instagram et urbaines, business model, étude de réalisabilité et de rentabilité.</p></div>
+          <div class="story"><b>Mon rôle</b><p>Chef de projet : découpage du projet en tâches, répartition, suivi de l'avancement et assemblage final pour garantir un rendu cohérent. Un rôle que je tiens sur tous mes projets d'équipe.</p></div>
+          <div class="story"><b>L'angle supply chain</b><p>Analyse des risques marché et logistique : gestion des fournisseurs, stockage, packaging éco-responsable et impact du transport du thé.</p></div>
+        </div>
+        <div class="project__chips"><span class="chip">Business plan</span><span class="chip">Business Model Canvas</span><span class="chip">SWOT</span><span class="chip">PESTEL</span><span class="chip">Branding</span></div>
+        <div class="project__links">
+          <button class="btn btn--solid" data-deck-open="spill-the-tea">Voir la présentation</button>
+<a class="btn btn--ghost" data-site-link="spill-the-tea" target="_blank" rel="noopener" hidden>Voir le site <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+          <a class="btn btn--text" data-anim-link="spill-the-tea" target="_blank" rel="noopener" hidden>Version animée (PowerPoint)</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== Project 04: Golden Journey (data science) ===== -->
+    <article class="project project--flip" id="golden">
+      <div class="project__visual reveal">
+        <div class="deck" data-deck-preview="golden-journey" data-cover="3" data-thumbs="4,5,7,8"></div>
+        <p class="screens__label">L'assistant en ligne</p>
+        <div class="screens screens--2">
+          <button data-deck-open="golden-app" data-start="1"><img data-deck-thumb="golden-app" data-i="1" data-thumb alt=""><span>Profil et demande</span></button>
+          <button data-deck-open="golden-app" data-start="2"><img data-deck-thumb="golden-app" data-i="2" data-thumb alt=""><span>Recommandation de l'IA</span></button>
+        </div>
+      </div>
+      <div class="project__info reveal">
+        <p class="project__num">04 — Data science &amp; IA · chef de projet, équipe de 4</p>
+        <h3 class="project__title">Golden Journey</h3>
+        <p class="project__kicker">Un assistant qui recommande le meilleur parcours de voyage selon le profil du client.</p>
+        <div class="project__story">
+          <div class="story"><b>Le besoin</b><p>« Le voyage ne s'arrête pas à l'atterrissage » : proposer une expérience complète (vol, transfert, services) adaptée au budget et au profil de chacun.</p></div>
+          <div class="story"><b>Le pipeline data</b><p>Collecte de 3 jeux de données Kaggle (aviation, automobile, luxe), nettoyage sous Google Colab (valeurs manquantes, doublons, normalisation), puis fusion en une base unique.</p></div>
+          <div class="story"><b>Le livrable</b><p>Un assistant en ligne : on choisit son profil (étudiant, budget moyen, premium), il sélectionne les meilleurs packages de la base et l'IA (API Gemini) propose un parcours vol, transfert et luxe, en citant le package choisi. Interface Streamlit.</p></div>
+        </div>
+        <div class="project__chips"><span class="chip">Python</span><span class="chip">Google Colab</span><span class="chip">Kaggle</span><span class="chip">API Gemini</span><span class="chip">Streamlit</span><span class="chip">Chatbase</span></div>
+        <div class="project__links">
+          <button class="btn btn--solid" data-deck-open="golden-journey">Voir la présentation</button>
+<a class="btn btn--ghost" data-site-link="golden-journey" target="_blank" rel="noopener" hidden>Essayer l'assistant <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+          <a class="btn btn--text" data-anim-link="golden-journey" target="_blank" rel="noopener" hidden>Version animée (PowerPoint)</a>
+        </div>
+        <p class="sleep-note">Hébergement gratuit : si l'assistant est en veille, cliquez sur « Yes, get this app back up! » et patientez environ 30 secondes.</p>
+      </div>
+    </article>
+
+    <!-- ===== Project 05: Logistics database ===== -->
+    <article class="project" id="bdd">
+      <div class="project__visual reveal">
+        <div class="soon">
+          <div class="soon__icon"><svg class="ic" aria-hidden="true"><use href="#i-database"/></svg></div>
+          <p class="soon__label"><svg class="ic" aria-hidden="true"><use href="#i-hammer"/></svg>Projet en cours de réalisation</p>
+          <p class="soon__title">Bientôt disponible</p>
+          <p class="soon__text">Le modèle de données et les formulaires seront présentés ici à la fin du projet.</p>
+          <div class="soon__bar"><i></i></div>
+        </div>
+      </div>
+
+      <div class="project__info reveal">
+        <p class="project__num">05 — Base de données · en cours</p>
+        <h3 class="project__title">Chaîne logistique d'une entreprise</h3>
+        <p class="project__kicker">Modéliser tous les flux, du fournisseur jusqu'au client.</p>
+        <div class="project__story">
+          <div class="story"><b>Objectif</b><p>Concevoir la base de données d'une entreprise fictive qui couvre toute sa gestion logistique.</p></div>
+          <div class="story"><b>Ce que ça montre</b><p>La capacité à traduire des flux physiques en un système d'information fiable.</p></div>
+        </div>
+        <div class="project__chips"><span class="chip">SQL</span><span class="chip">Microsoft Access</span><span class="chip">Modélisation</span><span class="chip">EIJV</span></div>
+      </div>
+    </article>
+
+
+    <!-- ===== 06: RSE note, compact summary linking to the full interactive note ===== -->
+    <article class="rsebrief reveal" id="rse">
+      <div class="rsebrief__head">
+        <span class="rsebrief__icon"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg></span>
+        <div>
+          <p class="project__num">06 — RSE &amp; supply chain · approfondissement personnel</p>
+          <h3 class="rsebrief__title">Feuille de route RSE pour une PME industrielle</h3>
+        </div>
+      </div>
+      <p class="rsebrief__text">Cas traité à l'examen du module RSE (EIJV) : SMAIR, PME fictive de 250 salariés qui importe ses composants d'Asie, assemble à Amiens et installe des systèmes de ventilation industrielle. J'ai ensuite choisi de l'approfondir en une note de recommandation complète.</p>
+      <ul class="rsebrief__points">
+        <li><b>Diagnostic</b> Délais d'approvisionnement instables, stocks immobilisés, emballages non valorisés, techniciens saturés.</li>
+        <li><b>Démarche</b> 5 étapes sur 3 ans appuyées sur l'ISO 26000, avec un projet pilote avant le déploiement.</li>
+        <li><b>Écoconception</b> Un bloc de ventilation modulaire, démontable, moins énergivore et adapté au transport.</li>
+        <li><b>Pilotage</b> Des indicateurs simples : émissions transport par bloc, emballages réutilisés, OTIF fournisseurs.</li>
+      </ul>
+      <div class="rsebrief__foot">
+        <div class="project__chips" style="margin:0"><span class="chip">RSE</span><span class="chip">ISO 26000</span><span class="chip">Achats responsables</span><span class="chip">Écoconception</span></div>
+        <a class="btn btn--ghost rsebrief__btn" href="rse-smair.html">Lire la note de recommandation complète <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+      </div>
+    </article>
+  </section>
+
+
+  <!-- =====================================================================
+       OTHER WORK (compact cards)
+       ===================================================================== -->
+  <section class="section section--alt" id="travaux">
+    <div class="section__head reveal">
+      <p class="eyebrow">Autres travaux</p>
+      <h2 class="section__title">Études, stratégie et analyse de marché.</h2>
+      <p class="section__intro">Des travaux réalisés à l'EST Salé, consultables en un clic.</p>
+    </div>
+    <div class="works">
+      <article class="work reveal">
+        <button class="work__cover" data-deck-open="feteelonia" aria-label="Voir les slides FêteElonia"><img data-deck-thumb="feteelonia" data-i="13" alt=""></button>
+        <div class="work__body">
+          <p class="work__meta">E-commerce · individuel</p>
+          <h3 class="work__title">FêteElonia, de l'idée au produit</h3>
+          <p class="work__text">Création d'un produit (cartes d'anniversaire personnalisables) : sourcing des composants auprès de fournisseurs, calcul du coût de revient (2 Dh pour un prix de vente de 10 Dh), canaux de vente, communication et livraison.</p>
+          <div class="work__links"><button class="btn btn--ghost btn--sm" data-deck-open="feteelonia">Slides</button><a class="btn btn--text btn--sm" data-anim-link="feteelonia" target="_blank" rel="noopener" hidden>Version animée</a></div>
+        </div>
+      </article>
+      <article class="work reveal">
+        <button class="work__cover" data-deck-open="marjane-labelvie" aria-label="Voir les slides Marjane vs Label'Vie"><img data-deck-thumb="marjane-labelvie" data-i="10" alt=""></button>
+        <div class="work__body">
+          <p class="work__meta">Stratégie de marque · chef de projet, équipe de 5</p>
+          <h3 class="work__title">Retail au Maroc : Marjane vs Label'Vie</h3>
+          <p class="work__text">Architecture de marque des deux leaders de la grande distribution, synergies (logistique centralisée, données clients), benchmark international, SWOT et recommandations.</p>
+          <div class="work__links"><button class="btn btn--ghost btn--sm" data-deck-open="marjane-labelvie">Slides</button><a class="btn btn--text btn--sm" data-anim-link="marjane-labelvie" target="_blank" rel="noopener" hidden>Version animée</a></div>
+        </div>
+      </article>
+      <article class="work reveal">
+        <button class="work__cover" data-deck-open="apple-digital" aria-label="Voir les slides Apple"><img data-deck-thumb="apple-digital" data-i="15" alt=""></button>
+        <div class="work__body">
+          <p class="work__meta">Marketing digital · chef de projet, équipe de 7</p>
+          <h3 class="work__title">Stratégie digitale Apple</h3>
+          <p class="work__text">Analyse de marché et de la concurrence, buyer personas issus d'un questionnaire, objectifs SMART, site web et contenus, puis suivi des performances avec des outils d'IA.</p>
+          <div class="work__links"><button class="btn btn--ghost btn--sm" data-deck-open="apple-digital">Slides</button><a class="btn btn--text btn--sm" data-anim-link="apple-digital" target="_blank" rel="noopener" hidden>Version animée</a></div>
+        </div>
+      </article>
+      <article class="work reveal">
+        <button class="work__cover work__cover--doc" data-open-doc="documents/etude-insatisfaction-etudiants.pdf" data-doc-title="Étude de marché · Insatisfaction des étudiants" aria-label="Lire le rapport">
+          <span class="work__docicon">PDF</span><span class="work__doclabel">Rapport d'étude</span>
+        </button>
+        <div class="work__body">
+          <p class="work__meta">Étude de marché · chef de projet, équipe de 4</p>
+          <h3 class="work__title">L'insatisfaction des étudiants de l'EST</h3>
+          <p class="work__text">Approche mixte : 7 entretiens semi-directifs puis un questionnaire auprès de 106 étudiants. Principales sources d'insatisfaction : infrastructures et gestion administrative. Recommandations managériales à la clé.</p>
+          <div class="work__links"><button class="btn btn--ghost btn--sm" data-open-doc="documents/etude-insatisfaction-etudiants.pdf" data-doc-title="Étude de marché · Insatisfaction des étudiants">Lire le rapport</button></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       PARCOURS
+       ===================================================================== -->
+  <section class="section section--alt" id="parcours">
+    <div class="section__head reveal">
+      <p class="eyebrow">De Salé à Saint-Quentin</p>
+      <h2 class="section__title">Un parcours hybride : gestion, data, puis ingénierie.</h2>
+      <p class="section__intro">Chaque étape est accompagnée de son justificatif.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl tl--future reveal">
+        <div class="tl__date">2027 — 2029</div>
+        <div><p class="tl__title">Alternance en supply chain</p><p class="tl__org">Votre entreprise ?</p><p class="tl__text">24 mois à partir du 1<sup>er</sup> juillet 2027, pendant les 2<sup>e</sup> et 3<sup>e</sup> années du cycle ingénieur.</p></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2026 — 2029</div>
+        <div><p class="tl__title">Cycle ingénieur · Logistique Innovante &amp; Supply Chain</p><p class="tl__org">École d'Ingénieurs Jules Verne · Saint-Quentin</p><p class="tl__text">Recherche opérationnelle (ordonnancement, PERT, flots, plus courts chemins), gestion de production, bases de données, programmation Python et démarche RSE.</p>
+        <span class="tl__actions"><button class="tl__proof" data-open-doc="documents/certificat-scolarite-eijv.pdf" data-doc-title="Certificat de scolarité · EIJV 2026-2027">Certificat de scolarité</button></span></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2026</div>
+        <div><p class="tl__title">Stage de fin d'études (2 mois)</p><p class="tl__org">Association ESMAROC · Rabat</p><p class="tl__text">Refonte UI/UX du site, optimisation des flux d'information, études de marché et évaluation de projets en tant que membre du jury.</p>
+        <span class="tl__actions"><a class="tl__proof" data-site-link="esmaroc" target="_blank" rel="noopener" hidden>Voir le site réalisé</a><button class="tl__proof" data-deck-open="stage-esmaroc">Voir la soutenance (avant / après)</button><button class="tl__proof" data-open-doc="documents/rapport-stage-2a.pdf" data-doc-title="Rapport de stage · 2e année">Rapport</button><button class="tl__proof" data-open-doc="documents/attestation-stage-esmaroc.pdf" data-doc-title="Attestation de stage · ESMAROC">Attestation</button></span></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2025 — 2026</div>
+        <div><p class="tl__title">Président de club parauniversitaire</p><p class="tl__org">EST Salé</p><p class="tl__text">Animation de l'équipe, organisation des activités et représentation du club.</p>
+        <button class="tl__proof" data-open-doc="documents/attestation-president-club.pdf" data-doc-title="Attestation · Président de club">Voir l'attestation</button></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2025</div>
+        <div><p class="tl__title">Stage d'initiation (2 mois)</p><p class="tl__org">DR NAVY · Le Taillan-Médoc, France</p><p class="tl__text">Société privée de sécurité incendie, en mission au camping Les Grands Pins : surveillance de nuit et rondes de contrôle, gestion des clients et des anomalies, coordination avec l'équipe. Création du nouveau logo de l'entreprise.</p>
+        <span class="tl__actions"><button class="tl__proof" data-deck-open="stage-dr-navy">Voir la soutenance</button><button class="tl__proof" data-open-doc="documents/rapport-stage-1a.pdf" data-doc-title="Rapport de stage · 1re année">Rapport</button><button class="tl__proof" data-open-doc="documents/attestation-stage-dr-navy.pdf" data-doc-title="Attestation de stage · DR NAVY">Attestation</button></span></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2024 — 2026</div>
+        <div><p class="tl__title">DUT Marketing Digital et Commercial · Major de promotion</p><p class="tl__org">École Supérieure de Technologie de Salé</p><p class="tl__text">Major de la filière en 1<sup>re</sup> et en 2<sup>e</sup> année. Études de marché, analyse de données et stratégie digitale.</p>
+        <button class="tl__proof" data-open-doc="documents/diplome-dut.pdf" data-doc-title="Attestation de réussite · DUT">Voir l'attestation de réussite</button></div>
+      </div>
+      <div class="tl reveal">
+        <div class="tl__date">2024</div>
+        <div><p class="tl__title">Baccalauréat Sciences de Gestion Comptable · Mention Bien</p><p class="tl__org">Lycée Technique Al Farabi · Salé</p><p class="tl__text">Délégué de classe sans interruption depuis cette année.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       PROOFS
+       ===================================================================== -->
+  <section class="section" id="preuves">
+    <div class="section__head reveal">
+      <p class="eyebrow">Preuves</p>
+      <h2 class="section__title">Ne me croyez pas sur parole.</h2>
+      <p class="section__intro">Les documents officiels qui attestent chaque réussite mentionnée sur mon CV. Cliquez pour les consulter.</p>
+    </div>
+    <div class="docs">
+      <button class="doc reveal" data-open-doc="documents/certificat-scolarite-eijv.pdf" data-doc-title="Certificat de scolarité · EIJV 2026-2027">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Certificat de scolarité</span><span class="doc__title">Cycle ingénieur · EIJV</span><span class="doc__meta">Logistique Innovante · 1<sup>re</sup> année · 2026 – 2027</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/releve-notes-dut-1a.pdf" data-doc-title="Relevé de notes · DUT 1re année">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Relevé de notes</span><span class="doc__title">Major de promotion · 1<sup>re</sup> année</span><span class="doc__meta">DUT Marketing Digital et Commercial, EST Salé</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/releve-notes-dut-2a.pdf" data-doc-title="Relevé de notes · DUT 2e année">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Relevé de notes</span><span class="doc__title">Major de promotion · 2<sup>e</sup> année</span><span class="doc__meta">DUT Marketing Digital et Commercial, EST Salé</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/diplome-dut.pdf" data-doc-title="Attestation de réussite · DUT">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Attestation de réussite</span><span class="doc__title">DUT Marketing Digital et Commercial</span><span class="doc__meta">Mention Très Bien · EST Salé · 2026</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/attestation-president-club.pdf" data-doc-title="Attestation · Président de club">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Attestation</span><span class="doc__title">Président de club parauniversitaire</span><span class="doc__meta">EST Salé · 2025 – 2026</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/attestation-stage-esmaroc.pdf" data-doc-title="Attestation de stage · ESMAROC">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Attestation de stage</span><span class="doc__title">Association ESMAROC</span><span class="doc__meta">Stage de fin d'études · Rabat · 2026</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/attestation-stage-dr-navy.pdf" data-doc-title="Attestation de stage · DR NAVY">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Attestation de stage</span><span class="doc__title">DR NAVY</span><span class="doc__meta">Stage d'initiation · France · 2025</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/baccalaureat.pdf" data-doc-title="Baccalauréat">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Diplôme</span><span class="doc__title">Baccalauréat · Mention Bien</span><span class="doc__meta">Sciences de Gestion Comptable · 2024</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/rapport-stage-2a.pdf" data-doc-title="Rapport de stage · 2e année">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Rapport</span><span class="doc__title">Rapport de stage · 2<sup>e</sup> année</span><span class="doc__meta">Association ESMAROC · Rabat</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/rapport-stage-1a.pdf" data-doc-title="Rapport de stage · 1re année">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Rapport</span><span class="doc__title">Rapport de stage · 1<sup>re</sup> année</span><span class="doc__meta">DR NAVY · France</span><span class="doc__cta">Consulter</span></div>
+      </button>
+      <button class="doc reveal" data-open-doc="documents/rapport-pfe.pdf" data-doc-title="Rapport de PFE">
+        <div class="doc__paper"><span class="doc__seal"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span></div>
+        <div class="doc__body"><span class="doc__kind">Rapport</span><span class="doc__title">Projet de fin d'études</span><span class="doc__meta">Influence des avis en ligne en restauration</span><span class="doc__cta">Consulter</span></div>
+      </button>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       SKILLS (each skill links to the project where it was used)
+       ===================================================================== -->
+  <section class="section section--alt" id="competences">
+    <div class="section__head reveal">
+      <p class="eyebrow">Compétences</p>
+      <h2 class="section__title">Des compétences prouvées par des projets.</h2>
+      <p class="section__intro">Chaque compétence renvoie à l'endroit où je l'ai utilisée.</p>
+    </div>
+    <div class="skills">
+      <div class="skill reveal">
+        <p class="skill__title">Supply chain &amp; recherche opérationnelle</p>
+        <p class="skill__sub">Optimiser les flux et les décisions</p>
+        <ul class="skill__list">
+          <li>Ordonnancement · PERT <a href="#parcours">EIJV</a></li>
+          <li>Flots · plus courts chemins <a href="#parcours">EIJV</a></li>
+          <li>Gestion de production <a href="#parcours">EIJV</a></li>
+          <li>Démarche RSE · ISO 26000 <a href="#rse">Note RSE</a></li>
+          <li>Écoconception · chaîne de valeur <a href="#rse">Note RSE</a></li>
+        </ul>
+      </div>
+      <div class="skill reveal">
+        <p class="skill__title">Data &amp; bases de données</p>
+        <p class="skill__sub">Structurer, analyser, restituer</p>
+        <ul class="skill__list">
+          <li>SQL · PostgreSQL <a href="#mebutik">Mebutik</a></li>
+          <li>Microsoft Access <a href="#bdd">BDD logistique</a></li>
+          <li>Power BI · SPSS · NVivo <a href="#avis-ia">PFE</a></li>
+          <li>Excel (TCD, RECHERCHEX, tableaux de bord) <a href="#avis-ia">PFE</a></li>
+        </ul>
+      </div>
+      <div class="skill reveal">
+        <p class="skill__title">Développement</p>
+        <p class="skill__sub">Construire des outils qui tournent</p>
+        <ul class="skill__list">
+          <li>Python · Flask <a href="#mebutik">Mebutik</a></li>
+          <li>HTML · CSS · JavaScript <a href="#mebutik">Mebutik</a></li>
+          <li>Tests (pytest) · CI GitHub Actions <a href="#mebutik">Mebutik</a></li>
+          <li>Déploiement (Render) <a href="#mebutik">Mebutik</a></li>
+        </ul>
+      </div>
+      <div class="skill reveal">
+        <p class="skill__title">IA &amp; automatisation</p>
+        <p class="skill__sub">Automatiser sans perdre le contrôle</p>
+        <ul class="skill__list">
+          <li>Workflows n8n <a href="#avis-ia">Avis IA</a></li>
+          <li>Prompt engineering <a href="#avis-ia">Avis IA</a></li>
+          <li>IA générative appliquée <a href="#avis-ia">Avis IA</a></li>
+          <li>Chatbots <a href="#avis-ia">Avis IA</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       ENGAGEMENT
+       ===================================================================== -->
+  <section class="section" id="engagements">
+    <div class="section__head reveal">
+      <p class="eyebrow">Engagements</p>
+      <h2 class="section__title">Prendre des responsabilités, depuis toujours.</h2>
+    </div>
+    <div class="engage">
+      <div class="engage__card engage__card--photo reveal" data-big="01">
+        <img class="engage__photo" src="images/club.webp" alt="" aria-hidden="true" loading="lazy">
+        <p class="engage__role">2025 — 2026 · EST Salé</p>
+        <p class="engage__title">Président de club parauniversitaire</p>
+        <p class="engage__text">Diriger une équipe d'étudiants, organiser les activités du club et le représenter auprès de l'école.</p>
+        <button class="btn btn--ghost btn--sm" data-open-doc="documents/attestation-president-club.pdf" data-doc-title="Attestation · Président de club">Voir l'attestation</button>
+      </div>
+      <div class="engage__card reveal" data-big="02">
+        <p class="engage__role">Depuis le baccalauréat</p>
+        <p class="engage__title">Délégué de classe, sans interruption</p>
+        <p class="engage__text">Élu chaque année : faire le lien entre les étudiants et l'équipe pédagogique, remonter les problèmes et proposer des solutions.</p>
+        <p class="engage__role" style="margin-top:28px">Langues</p>
+        <ul class="skill__list" style="margin-top:12px">
+          <li>Arabe <span style="color:var(--muted)">Langue maternelle</span></li>
+          <li>Français <span style="color:var(--muted)">Courant</span></li>
+          <li>Anglais <span style="color:var(--muted)">Avancé</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       CONTACT
+       ===================================================================== -->
+  <section class="contact" id="contact">
+    <p class="eyebrow reveal">Contact</p>
+    <h2 class="contact__title reveal">Construisons ensemble une supply chain <em>plus performante</em>.</h2>
+    <p class="contact__sub reveal">Je recherche une alternance de 24 mois à partir du 1<sup>er</sup> juillet 2027. Je vous réponds rapidement.</p>
+    <button class="contact__mail reveal" id="mailCopy" data-mail="ahmedamineboutkhil15@gmail.com" title="Copier l'adresse">
+      <span>ahmedamineboutkhil15@gmail.com</span><small style="color:var(--wine-text)">Copier</small>
+    </button>
+    <div class="contact__actions reveal">
+      <a class="btn btn--solid" href="mailto:ahmedamineboutkhil15@gmail.com">Écrire un e-mail</a>
+      <a class="btn btn--ghost" href="https://www.linkedin.com/in/ahmed-amine-boutkhil-981572395/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--ghost" href="tel:+33743632238">+33 7 43 63 22 38</a>
+      <a class="btn btn--ghost" href="CV_Ahmed_Amine_Boutkhil.pdf" download>Télécharger le CV</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>© 2026 Ahmed Amine Boutkhil · Saint-Quentin, France</span>
+    <span><a href="https://github.com/Hamada665" target="_blank" rel="noopener">GitHub</a> · <a href="#top">Retour en haut <svg class="ic" aria-hidden="true"><use href="#i-arrow-up"/></svg></a></span>
+  </footer>
+
+  <!-- Slide viewer -->
+  <dialog class="slides" id="slides" aria-label="Présentation">
+    <div class="slides__wrap">
+      <div>
+        <div class="slides__bar">
+          <span class="slides__title" id="slidesTitle"></span>
+          <span class="slides__count" id="slidesCount"></span>
+          <a class="btn btn--ghost btn--sm" id="slidesAnim" target="_blank" rel="noopener" hidden>Version animée <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+          <button class="viewer__close" id="slidesClose" aria-label="Fermer"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+        </div>
+        <div class="slides__progress"><i id="slidesProgress"></i></div>
+      </div>
+      <div class="slides__stage" id="slidesStage">
+        <img class="slides__img" id="slidesImg" alt="">
+        <button class="slides__nav slides__prev" id="slidesPrev" aria-label="Slide précédente">‹</button>
+        <button class="slides__nav slides__next" id="slidesNext" aria-label="Slide suivante">›</button>
+        <span class="slides__rotate"><svg class="ic" aria-hidden="true"><use href="#i-rotate"/></svg> Tournez votre téléphone pour agrandir · glissez pour changer de slide</span>
+      </div>
+      <div class="slides__strip" id="slidesStrip"></div>
+    </div>
+  </dialog>
+
+  <!-- PDF viewer -->
+  <dialog class="viewer" id="viewer">
+    <div class="viewer__bar">
+      <span class="viewer__title" id="viewerTitle"></span>
+      <a class="btn btn--ghost btn--sm" id="viewerOpen" target="_blank" rel="noopener">Nouvel onglet <svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></a>
+      <a class="btn btn--solid btn--sm" id="viewerDl" download>Télécharger</a>
+      <button class="viewer__close" id="viewerClose" aria-label="Fermer"><svg class="ic" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <iframe id="viewerFrame" title="Document"></iframe>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+  /* =====================================================================
+     CONFIGURATION: edit these values
+     ===================================================================== */
+  const CONFIG = {
+    // Public URL of the Mebutik Sports demo on Render
+    // Public URL of a DEMO instance (fictional data). Leave "" to hide the access panel.
+    demoUrl: "",
+    // Live websites of the projects ("" hides the button)
+    sites: {
+      "spill-the-tea":  "https://hamada665.github.io/spill-the-tea2/",
+      "golden-journey": "https://golden-journey-ai-exj3axmwkdxyy9ebkfkq9g.streamlit.app/",
+      "esmaroc":        "https://hamada665.github.io/ESMaroc/"
+    },
+    // Presentations: number of slides exported in slides/<key>/, and an optional
+    // OneDrive share link ("Anyone with the link can view") for the animated version
+    decks: {
+      "spill-the-tea":    { title: "Spill The Tea · Projet d'entrepreneuriat", count: 18, onedrive: "" },
+      "golden-journey":   { title: "Golden Journey · Projet data science",      count: 9,  onedrive: "" },
+      "pfe":              { title: "Soutenance de PFE · Avis clients en ligne",  count: 18, onedrive: "" },
+      "stage-esmaroc":    { title: "Soutenance de stage · ESMAROC",            count: 18, onedrive: "" },
+      "stage-dr-navy":    { title: "Soutenance de stage · DR NAVY",            count: 17, onedrive: "" },
+      "feteelonia":       { title: "FêteElonia · Exposé e-commerce",           count: 15, onedrive: "" },
+      "marjane-labelvie": { title: "Marjane vs Label'Vie · Stratégie de marque", count: 13, onedrive: "" },
+      "apple-digital":    { title: "Stratégie digitale Apple",                 count: 28, onedrive: "" },
+      "mebutik":          { title: "Mebutik Sports · Écrans de l'application",   count: 4,  onedrive: "" },
+      "golden-app":       { title: "Golden Journey · L'assistant en action",      count: 2,  onedrive: "" }
+    },
+    // Demo accounts shown to recruiters
+    accounts: {
+      admin:    { user: "demo.admin",    pass: "6EziTnkEVaMDxpCw", desc: "Vue complète : utilisateurs, paramètres, stock, ventes et rapports." },
+      manager:  { user: "demo.manager",  pass: "dPp7JGKShpAQrDtY", desc: "Vue de gestion : stock, ventes et suivi de l'activité." },
+      employee: { user: "demo.employee", pass: "XkPw6JsGuccbN9tY", desc: "Vue opérationnelle : caisse et consultation du stock." }
+    }
+  };
+
+  /* ===== Helpers ===== */
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = matchMedia('(hover: none)').matches;
+
+  function toast(msg) {
+    const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); }
+    catch { // Fallback for older browsers / file://
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); ta.remove();
+    }
+  }
+
+  /* ===== 1. Navigation: shrink on scroll, mobile menu, active link ===== */
+  const nav = $('#nav');
+  $('#burger').addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    $('#burger').setAttribute('aria-expanded', open);
+  });
+  $$('#navLinks a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const spyTargets = $$('[data-spy]').map(a => document.getElementById(a.dataset.spy));
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        $$('[data-spy]').forEach(a => a.classList.toggle('active', a.dataset.spy === e.target.id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  spyTargets.forEach(t => t && spy.observe(t));
+
+  /* ===== 2. Portrait: fade out while scrolling, tap for colors on mobile ===== */
+  const portrait = $('#portrait');
+  let ticking = false;
+  function onScroll() {
+    const y = scrollY;
+    const progress = Math.min(y / (innerHeight * 0.7), 1);
+    if (!reduceMotion) {
+      portrait.style.opacity = 1 - progress;
+      portrait.style.transform = `translateY(${progress * 60}px)`;
+    }
+    nav.classList.toggle('scrolled', y > 20);
+    ticking = false;
+  }
+  addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  if (isTouch) portrait.addEventListener('click', () => portrait.classList.toggle('is-color'));
+
+  /* ===== 3. Reveal on scroll + count-up for key figures ===== */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      $$('[data-count]', e.target).forEach(countUp);
+      revealObs.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  $$('.reveal').forEach(el => revealObs.observe(el));
+
+  function countUp(el) {
+    const end = +el.dataset.count, dur = 1200, start = performance.now();
+    if (reduceMotion) { el.textContent = end; return; }
+    (function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  /* ===== 4. Optional images: show them only if the file exists ===== */
+  $$('[data-img]').forEach(box => {
+    const img = $('img', box);
+    if (!img) return;
+    const ok = () => box.classList.add('has-img');
+    if (img.complete && img.naturalWidth) ok();
+    img.addEventListener('load', ok);
+    img.addEventListener('error', () => img.remove());
+  });
+
+  /* ===== 5. Mebutik demo access (role tabs + copy buttons) ===== */
+  if (CONFIG.demoUrl) $('#access').hidden = false;
+  const demoBtn = $('#demoBtn');
+  demoBtn.href = CONFIG.demoUrl;
+  if (CONFIG.demoUrl) $('#demoUrlLabel').textContent = CONFIG.demoUrl.replace(/^https?:\/\//, '');
+  function setRole(role) {
+    const acc = CONFIG.accounts[role];
+    $('#credUser').textContent = acc.user;
+    $('#credPass').textContent = acc.pass;
+    $('#roleDesc').textContent = acc.desc;
+    $$('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.role === role));
+  }
+  $$('.tab').forEach(t => t.addEventListener('click', () => setRole(t.dataset.role)));
+  setRole('admin');
+  $$('.copy').forEach(btn => btn.addEventListener('click', async () => {
+    await copyText($('#' + btn.dataset.copy).textContent);
+    btn.textContent = 'Copié'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copier'; btn.classList.remove('done'); }, 1500);
+  }));
+
+  /* ===== 6. AI workflow: connectors + interactive simulation ===== */
+  const SCENARIOS = [
+    { icon: "smile", label: "Compliment", type: "compliment", score: 8, path: ["in","ai","dec","rep","send"],
+      review: "Le tajine était délicieux et le service très rapide. Merci à toute l'équipe !",
+      answer: "Merci beaucoup pour ce retour chaleureux ! Toute l'équipe est ravie que le tajine et le service vous aient plu. Au plaisir de vous accueillir à nouveau !" },
+    { icon: "help", label: "Question", type: "question", score: 3, path: ["in","ai","dec","rep","send"],
+      review: "Est-ce que vous proposez des plats végétariens le soir ?",
+      answer: "Bonjour et merci pour votre question ! Oui, notre carte du soir propose plusieurs plats végétariens. N'hésitez pas à demander conseil à notre équipe sur place." },
+    { icon: "meh", label: "Plainte modérée", type: "plainte", score: 5, path: ["in","ai","dec","rep","send"],
+      review: "Commande arrivée tiède, avec 40 minutes de retard. Un peu déçu.",
+      answer: "Nous sommes sincèrement désolés pour ce retard et la température de votre commande. Ce n'est pas notre standard : nous avons transmis votre retour à l'équipe et serions heureux de nous rattraper lors de votre prochaine commande." },
+    { icon: "siren", label: "Plainte grave", type: "plainte", score: 10, path: ["in","ai","dec","alert"],
+      review: "J'ai été malade toute la nuit après avoir mangé chez vous. C'est inadmissible.",
+      answer: "Aucune réponse automatique.\nAlerte urgente envoyée au responsable, qui prend personnellement en charge ce client.", alert: true }
+  ];
+  const EDGES = [["in","ai"],["ai","dec"],["dec","rep"],["rep","send"],["dec","alert"]];
+  const flow = $('#flow'), svg = $('#flowSvg');
+
+  function drawEdges() {
+    if (getComputedStyle(svg).display === 'none') return;
+    const box = flow.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+    svg.innerHTML = EDGES.map(([a, b]) => {
+      const A = $(`[data-node="${a}"]`).getBoundingClientRect(), B = $(`[data-node="${b}"]`).getBoundingClientRect();
+      const x1 = A.right - box.left, y1 = A.top + A.height / 2 - box.top;
+      let x2 = B.left - box.left, y2 = B.top + B.height / 2 - box.top;
+      if (a === 'rep' && b === 'send') {         // vertical link inside the last column
+        const x = A.left + A.width / 2 - box.left;
+        return `<path data-edge="${a}-${b}" d="M ${x} ${A.bottom - box.top} L ${x} ${B.top - box.top}"/>`;
+      }
+      const mx = (x1 + x2) / 2;
+      return `<path data-edge="${a}-${b}" d="M ${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}"/>`;
+    }).join('');
+    if (current) highlight(current.path);
+  }
+  function highlight(path) {
+    $$('.node').forEach(n => {
+      const on = path.includes(n.dataset.node);
+      n.classList.toggle('lit', on); n.classList.toggle('dim', !on);
+    });
+    $$('path', svg).forEach(p => {
+      const [a, b] = p.dataset.edge.split('-');
+      p.classList.toggle('lit', path.includes(a) && path.includes(b));
+    });
+  }
+  function typeText(el, text, speed = 14) {
+    clearInterval(el._t);
+    if (reduceMotion) { el.textContent = text; return; }
+    el.textContent = ''; let i = 0;
+    el._t = setInterval(() => { el.textContent = text.slice(0, ++i); if (i >= text.length) clearInterval(el._t); }, speed);
+  }
+  let current = null;
+  function runScenario(i) {
+    current = SCENARIOS[i];
+    $$('.sim__choice').forEach((b, k) => b.classList.toggle('on', k === i));
+    $('#simReview').textContent = '« ' + current.review + ' »';
+    const type = $('#simType');
+    type.className = 'pill pill--' + current.type;
+    type.textContent = current.type.charAt(0).toUpperCase() + current.type.slice(1);
+    $('#simScore').textContent = current.score + '/10';
+    $('#simGauge').style.width = (current.score * 10) + '%';
+    const ans = $('#simAnswer');
+    ans.classList.toggle('alert', !!current.alert);
+    $('#simAlertIcon').style.display = current.alert ? '' : 'none';
+    drawEdges();
+    highlight(current.path);
+    typeText(ans, current.answer);
+  }
+  $('#simChoices').innerHTML = SCENARIOS.map((s, i) => `<button class="sim__choice" data-i="${i}"><svg class="ic" aria-hidden="true"><use href="#i-${s.icon}"/></svg>${s.label}</button>`).join('');
+  $$('.sim__choice').forEach(b => b.addEventListener('click', () => runScenario(+b.dataset.i)));
+  // Redraw connectors whenever the layout changes (fonts loading, resize, reveal...)
+  new ResizeObserver(() => requestAnimationFrame(drawEdges)).observe(flow);
+  addEventListener('load', drawEdges);
+  if (document.fonts) document.fonts.ready.then(drawEdges);
+  flow.closest('.reveal').addEventListener('transitionend', drawEdges);
+  drawEdges();
+  // Auto-play the first scenario when the diagram becomes visible
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { drawEdges(); runScenario(0); o.disconnect(); } }, { threshold: .4 }).observe(flow);
+
+  /* ===== 7. Demo video: show a placeholder until the file exists ===== */
+  const videoBox = $('#videoBox');
+  const vid = $('video', videoBox), vidSrc = $('source', videoBox);
+  const vidMissing = () => videoBox.classList.add('missing');
+  vidSrc.addEventListener('error', vidMissing);
+  vid.addEventListener('error', vidMissing);
+  if (vid.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) vidMissing();
+  // Only a real 404 hides the player (the check itself can fail on local files)
+  if (location.protocol.startsWith('http')) fetch(vidSrc.getAttribute('src'), { method: 'HEAD' }).then(r => { if (!r.ok) vidMissing(); }).catch(() => {});
+
+  /* ===== 8. Documents: viewer on desktop, new tab on mobile, "coming soon" if missing ===== */
+  const viewer = $('#viewer');
+  const docButtons = $$('[data-open-doc]');
+  const docStatus = {};
+  // First-page previews (images/docs/<file>.webp) on the document cards
+  $$('.doc[data-open-doc]').forEach(card => {
+    const name = card.dataset.openDoc.split('/').pop().replace('.pdf', '');
+    const src = (window.SLIDE_DATA && window.SLIDE_DATA[`images/docs/${name}.webp`]) || `images/docs/${name}.webp`;
+    const img = new Image();
+    img.onload = () => { const paper = $('.doc__paper', card); paper.style.setProperty('--thumb', `url("${src}")`); paper.classList.add('has-thumb'); };
+    img.src = src;
+  });
+  // Check once per file whether it exists (works on GitHub Pages)
+  if (location.protocol.startsWith('http')) [...new Set(docButtons.map(b => b.dataset.openDoc))].forEach(url => {
+    fetch(url, { method: 'HEAD' })
+      .then(r => { docStatus[url] = r.ok; if (!r.ok) markMissing(url); })
+      .catch(() => { docStatus[url] = false; markMissing(url); });
+  });
+  function markMissing(url) {
+    docButtons.filter(b => b.dataset.openDoc === url).forEach(b => {
+      b.classList.add('missing');
+      const cta = $('.doc__cta', b); if (cta) cta.textContent = 'Bientôt disponible';
+    });
+  }
+  docButtons.forEach(btn => btn.addEventListener('click', () => {
+    const url = btn.dataset.openDoc, title = btn.dataset.docTitle || 'Document';
+    if (docStatus[url] === false) { toast('Document bientôt disponible'); return; }
+    if (isTouch || innerWidth < 860) { window.open(url, '_blank', 'noopener'); return; }
+    $('#viewerTitle').textContent = title;
+    $('#viewerFrame').src = url;
+    $('#viewerOpen').href = url;
+    $('#viewerDl').href = url;
+    viewer.showModal();
+  }));
+  $('#viewerClose').addEventListener('click', () => viewer.close());
+  viewer.addEventListener('click', e => { if (e.target === viewer) viewer.close(); });
+  viewer.addEventListener('close', () => { $('#viewerFrame').src = 'about:blank'; });
+
+
+  /* ===== 10. Presentations: previews, thumbnails and the slide viewer ===== */
+  const pad = n => String(n).padStart(2, '0');
+  // window.SLIDE_DATA is only defined in the standalone preview file (images embedded)
+  const slideSrc = (key, i, thumb) => {
+    const path = `slides/${key}/${thumb ? 't' : ''}${pad(i)}.webp`;
+    return (window.SLIDE_DATA && window.SLIDE_DATA[path]) || path;
+  };
+
+  // Stacked preview with thumbnails
+  $$('[data-deck-preview]').forEach(box => {
+    const key = box.dataset.deckPreview, deck = CONFIG.decks[key];
+    const cover = +box.dataset.cover || 1;
+    const thumbs = (box.dataset.thumbs || '').split(',').filter(Boolean).map(Number);
+    box.innerHTML = `
+      <button class="deck__stack" data-deck-open="${key}" data-start="${cover}" aria-label="Ouvrir la présentation">
+        <div class="deck__cover"><img src="${slideSrc(key, cover)}" alt="${deck.title}" loading="lazy"></div>
+        <span class="deck__badge"><i><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></i>Voir les ${deck.count} slides</span>
+      </button>
+      <div class="deck__thumbs">${thumbs.map(i => `<button data-deck-open="${key}" data-start="${i}" aria-label="Slide ${i}"><img src="${slideSrc(key, i, true)}" alt="" loading="lazy"></button>`).join('')}</div>`;
+  });
+  // Covers of the compact "other work" cards
+  $$('[data-deck-thumb]').forEach(img => { img.src = slideSrc(img.dataset.deckThumb, +img.dataset.i || 1, 'thumb' in img.dataset); img.loading = 'lazy'; });
+  // Project website links: shown only when a URL is configured
+  $$('[data-site-link]').forEach(a => {
+    const url = CONFIG.sites[a.dataset.siteLink];
+    if (url) { a.href = url; a.hidden = false; }
+  });
+  // "Animated version" links: shown only when a OneDrive link is configured
+  $$('[data-anim-link]').forEach(a => {
+    const url = CONFIG.decks[a.dataset.animLink]?.onedrive;
+    if (url) { a.href = url; a.hidden = false; }
+  });
+
+  const slides = $('#slides'), sImg = $('#slidesImg'), sStrip = $('#slidesStrip');
+  let deckKey = null, idx = 1;
+  function openDeck(key, start = 1) {
+    const deck = CONFIG.decks[key]; if (!deck) return;
+    deckKey = key;
+    $('#slidesTitle').textContent = deck.title;
+    const anim = $('#slidesAnim');
+    anim.hidden = !deck.onedrive; if (deck.onedrive) anim.href = deck.onedrive;
+    sStrip.innerHTML = Array.from({ length: deck.count }, (_, k) =>
+      `<button data-i="${k + 1}" aria-label="Slide ${k + 1}"><img src="${slideSrc(key, k + 1, true)}" alt="" loading="lazy"></button>`).join('');
+    $$('button', sStrip).forEach(b => b.addEventListener('click', () => show(+b.dataset.i)));
+    slides.showModal();
+    document.body.style.overflow = 'hidden';
+    show(start, true);
+  }
+  function show(i, instant) {
+    const deck = CONFIG.decks[deckKey];
+    idx = Math.max(1, Math.min(deck.count, i));
+    const src = slideSrc(deckKey, idx);
+    if (instant || reduceMotion) { sImg.src = src; }
+    else {
+      sImg.classList.add('fade');
+      const pre = new Image(); pre.src = src;
+      pre.onload = pre.onerror = () => { sImg.src = src; sImg.classList.remove('fade'); };
+    }
+    sImg.alt = `${deck.title} · slide ${idx}`;
+    $('#slidesCount').textContent = `${idx} / ${deck.count}`;
+    $('#slidesProgress').style.width = (idx / deck.count * 100) + '%';
+    $('#slidesPrev').disabled = idx === 1;
+    $('#slidesNext').disabled = idx === deck.count;
+    $$('button', sStrip).forEach(b => b.classList.toggle('on', +b.dataset.i === idx));
+    const on = $('button.on', sStrip); if (on) on.scrollIntoView({ block: 'nearest', inline: 'center', behavior: instant ? 'auto' : 'smooth' });
+    [idx + 1, idx - 1].forEach(n => { if (n >= 1 && n <= deck.count) new Image().src = slideSrc(deckKey, n); }); // preload neighbours
+  }
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-deck-open]');
+    if (t) { e.preventDefault(); openDeck(t.dataset.deckOpen, +t.dataset.start || 1); }
+  });
+  $('#slidesPrev').addEventListener('click', () => show(idx - 1));
+  $('#slidesNext').addEventListener('click', () => show(idx + 1));
+  $('#slidesClose').addEventListener('click', () => slides.close());
+  slides.addEventListener('close', () => { document.body.style.overflow = ''; });
+  sImg.addEventListener('click', e => { const r = sImg.getBoundingClientRect(); show(e.clientX - r.left > r.width / 2 ? idx + 1 : idx - 1); });
+  document.addEventListener('keydown', e => {
+    if (!slides.open) return;
+    if (e.key === 'ArrowRight') show(idx + 1);
+    if (e.key === 'ArrowLeft') show(idx - 1);
+  });
+  // Swipe on touch screens
+  let x0 = null;
+  $('#slidesStage').addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $('#slidesStage').addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) show(dx < 0 ? idx + 1 : idx - 1);
+  });
+
+  /* ===== 9. Contact: copy e-mail ===== */
+  $('#mailCopy').addEventListener('click', async () => {
+    await copyText($('#mailCopy').dataset.mail);
+    toast('Adresse e-mail copiée');
+  });
+  </script>
+</body>
+</html>
