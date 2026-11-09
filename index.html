@@ -194,6 +194,9 @@
       position: absolute; z-index: 2; left: var(--pad-x); bottom: 34px;
       display: flex; align-items: center; gap: 12px; font-size: .72rem; letter-spacing: 2.5px; color: var(--muted);
     }
+    .scroll-cue { transition: opacity .4s; }
+    .scroll-cue.gone { opacity: 0; pointer-events: none; }
+    @media (max-height: 820px) { .scroll-cue { display: none; } }   /* not enough room under the hero content */
     .scroll-cue span { width: 40px; height: 1px; background: var(--wine-text); transform-origin: left; animation: cue 2.4s ease-in-out infinite; }
     @keyframes cue { 0%,100% { transform: scaleX(.4); } 50% { transform: scaleX(1); } }
 
@@ -1396,6 +1399,7 @@
       portrait.style.transform = `translateY(${progress * 60}px)`;
     }
     nav.classList.toggle('scrolled', y > 20);
+    $('.scroll-cue').classList.toggle('gone', y > 40);   // the hint disappears as soon as the visitor scrolls
     ticking = false;
   }
   addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
